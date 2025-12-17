@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\intersectionexittrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\intersectionexittrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\assets\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\intersectionexittrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\intersectionexittrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\assets\\intersectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,11 +30,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "IntersectionExitTrigger.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\IntersectionExitTrigger.cs",
               "RelativeDocumentMoniker": "Assets\\IntersectionExitTrigger.cs",
@@ -83,13 +83,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Npc.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Npc.cs",
               "RelativeDocumentMoniker": "Assets\\Npc.cs",
               "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Npc.cs",
               "RelativeToolTip": "Assets\\Npc.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAuwGUAAABIAAAAAAAAAA==",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAAwGkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T10:04:43.091Z",
               "EditorCaption": ""
