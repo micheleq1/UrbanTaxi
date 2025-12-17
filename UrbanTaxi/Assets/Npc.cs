@@ -14,6 +14,7 @@ public class NpcCarWaypoint : MonoBehaviour
 
     [Header("Traffic Awareness")]
     public LayerMask carLayer;
+    public LayerMask barrieraLayer;
     public float sensorLength = 8f;
     public float stopDistance = 2f;
     public float sensorHeight = 0.6f;
@@ -36,12 +37,10 @@ public class NpcCarWaypoint : MonoBehaviour
         if (waypoints == null || waypoints.Length == 0) return;
         if (waypoints[idx] == null) return;
 
-        // Direzione verso waypoint
         Transform target = waypoints[idx];
         Vector3 dir = target.position - rb.position;
         dir.y = 0f;
 
-        // Passa al prossimo waypoint
         if (dir.magnitude < reachDistance)
         {
             idx++;
@@ -52,41 +51,35 @@ public class NpcCarWaypoint : MonoBehaviour
 
         Vector3 forward = dir.normalized;
 
-        // Rotazione verso waypoint
         Quaternion look = Quaternion.LookRotation(forward);
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, look, turnSpeed * Time.fixedDeltaTime));
 
-        // Velocità desiderata base
         float desiredSpeed = speed;
 
-        // 1) STOP/precedenze incrocio (se non ho permesso, mi fermo)
         if (!canEnterIntersection)
         {
             desiredSpeed = 0f;
         }
         else
         {
-            // 2) Sensore frontale (rallenta se auto davanti)
             Vector3 origin = rb.position + Vector3.up * sensorHeight;
 
-            if (Physics.Raycast(origin, transform.forward, out RaycastHit hit, sensorLength, carLayer))
-            {
-                if (hit.rigidbody != null && hit.rigidbody != rb)
-                {
-                    float d = hit.distance;
+            LayerMask obstacleMask = carLayer | barrieraLayer;
 
-                    if (d <= stopDistance)
-                        desiredSpeed = 0f;
-                    else
-                    {
-                        float t = Mathf.InverseLerp(stopDistance, sensorLength, d);
-                        desiredSpeed = Mathf.Lerp(0f, speed, t);
-                    }
+            if (Physics.Raycast(origin, transform.forward, out RaycastHit hit, sensorLength, obstacleMask))
+            {
+                float d = hit.distance;
+
+                if (d <= stopDistance)
+                    desiredSpeed = 0f;
+                else
+                {
+                    float t = Mathf.InverseLerp(stopDistance, sensorLength, d);
+                    desiredSpeed = Mathf.Lerp(0f, speed, t);
                 }
             }
         }
 
-        // Applica velocità con frenata morbida (mantiene la Y attuale)
         Vector3 targetVel = forward * desiredSpeed;
         Vector3 vel = Vector3.Lerp(
             rb.velocity,
