@@ -66,24 +66,43 @@ public class NpcCarWaypoint : MonoBehaviour
         }
         else
         {
-            // 2) Sensore frontale (rallenta se auto davanti)
+            // 2) Sensori frontali (robusti): centro + sinistra + destra
+            Vector3 forwardDir = rb.rotation * Vector3.forward; // direzione reale fisica
             Vector3 origin = rb.position + Vector3.up * sensorHeight;
 
-            if (Physics.Raycast(origin, transform.forward, out RaycastHit hit, sensorLength, carLayer))
-            {
-                if (hit.rigidbody != null && hit.rigidbody != rb)
-                {
-                    float d = hit.distance;
+            // offset laterali (larghezza “mezza corsia”)
+            Vector3 right = rb.rotation * Vector3.right;
+            float sideOffset = 0.35f;
 
-                    if (d <= stopDistance)
-                        desiredSpeed = 0f;
-                    else
-                    {
-                        float t = Mathf.InverseLerp(stopDistance, sensorLength, d);
-                        desiredSpeed = Mathf.Lerp(0f, speed, t);
-                    }
+            bool hasCarAhead = false;
+            float nearestDist = sensorLength;
+
+            RaycastHit hit;
+            if (Physics.Raycast(origin, forwardDir, out hit, sensorLength, carLayer))
+            {
+                if (hit.rigidbody != null && hit.rigidbody != rb) { hasCarAhead = true; nearestDist = Mathf.Min(nearestDist, hit.distance); }
+            }
+            if (Physics.Raycast(origin + right * sideOffset, forwardDir, out hit, sensorLength, carLayer))
+            {
+                if (hit.rigidbody != null && hit.rigidbody != rb) { hasCarAhead = true; nearestDist = Mathf.Min(nearestDist, hit.distance); }
+            }
+            if (Physics.Raycast(origin - right * sideOffset, forwardDir, out hit, sensorLength, carLayer))
+            {
+                if (hit.rigidbody != null && hit.rigidbody != rb) { hasCarAhead = true; nearestDist = Mathf.Min(nearestDist, hit.distance); }
+            }
+
+            if (hasCarAhead)
+            {
+                float d = nearestDist;
+
+                if (d <= stopDistance) desiredSpeed = 0f;
+                else
+                {
+                    float t = Mathf.InverseLerp(stopDistance, sensorLength, d);
+                    desiredSpeed = Mathf.Lerp(0f, speed, t);
                 }
             }
+
         }
 
         // Applica velocità con frenata morbida (mantiene la Y attuale)
@@ -98,8 +117,9 @@ public class NpcCarWaypoint : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
         Vector3 origin = transform.position + Vector3.up * sensorHeight;
-        Gizmos.DrawLine(origin, origin + transform.forward * sensorLength);
+        Vector3 forwardDir = (Application.isPlaying && rb != null) ? (rb.rotation * Vector3.forward) : transform.forward;
+        Gizmos.DrawLine(origin, origin + forwardDir * sensorLength);
+
     }
 }
