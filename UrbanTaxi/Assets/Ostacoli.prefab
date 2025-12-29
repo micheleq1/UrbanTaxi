@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7810609999651891565}
   - component: {fileID: 7708499365249237876}
   - component: {fileID: 2003058028223221436}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Props_Traffic Control Barrier Fence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 589409556489170097}
   - component: {fileID: 7433489785632062352}
   - component: {fileID: 1929563728958061681}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Props_Traffic cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 3176381978825681799}
   - component: {fileID: 230454078487049085}
   - component: {fileID: 7451478430453473310}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Props_Traffic cone (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 7612975994494353807}
   - component: {fileID: 200308355434195003}
   - component: {fileID: 1081663327072963206}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Props_Traffic Control Barrier Fence (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 3310987470967368244}
   - component: {fileID: 6097043285668112369}
   - component: {fileID: 3227161421369997137}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Props_Traffic cone (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 5452552370346106278}
   - component: {fileID: 6645140420409148717}
   - component: {fileID: 5832740692406035924}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Props_Traffic cone (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +551,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1087843949713466055}
-  m_Layer: 0
+  - component: {fileID: 6036401114256507857}
+  m_Layer: 6
   m_Name: Ostacoli
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,7 +568,7 @@ Transform:
   m_GameObject: {fileID: 8147043194752673613}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.19, y: 0, z: -0.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -579,3 +580,24 @@ Transform:
   - {fileID: 5203292117699078502}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6036401114256507857
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147043194752673613}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.1897283, y: 3.841876, z: 8.831232}
+  m_Center: {x: 1.4222329, y: -0.07906151, z: -1.8035011}
