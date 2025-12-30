@@ -25,9 +25,9 @@ public class NpcCarWaypoint : MonoBehaviour
     public float sensorForwardOffset = 0.5f;
 
     [Header("Random Breakdown")]
-    public float incidentCheckInterval = 15f;
-    public float incidentProbability = 0.05f;
-    public float incidentDuration = 25f;
+    public float incidentCheckInterval = 20f;
+    public float incidentProbability = 0.20f;
+    public float incidentDuration = 30f;
 
     [Header("Visual Effects")]
     public ParticleSystem smokeFX;
