@@ -6,8 +6,8 @@ public class IntersectionExitTrigger : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        var car = other.GetComponentInParent<NpcCarWaypoint>();
-        if (car != null && intersection != null)
-            intersection.NotifyExit(car);
+        var vehicle = other.GetComponentInParent<IIntersectionVehicle>();
+        if (vehicle != null && intersection != null)
+            intersection.NotifyExit(vehicle);
     }
 }

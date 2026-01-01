@@ -1,34 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IntersectionController : MonoBehaviour
+    public class IntersectionController : MonoBehaviour
 {
-    private NpcCarWaypoint currentCar = null;
-    private Queue<NpcCarWaypoint> queue = new Queue<NpcCarWaypoint>();
+    private IIntersectionVehicle currentCar = null;
+    private Queue<IIntersectionVehicle> queue = new Queue<IIntersectionVehicle>();
 
-    public void RequestEnter(NpcCarWaypoint car)
+    public void RequestEnter(IIntersectionVehicle car)
     {
         if (car == null) return;
         if (car == currentCar) return;
 
-        // evita doppioni in coda
         foreach (var c in queue)
             if (c == car) return;
 
         if (currentCar == null)
         {
             currentCar = car;
-            car.SetIntersectionPermission(true);   // solo questa può entrare
+            car.SetIntersectionPermission(true);
         }
         else
         {
             queue.Enqueue(car);
-            car.SetIntersectionPermission(false);  // tutte le altre si fermano
+            car.SetIntersectionPermission(false);
         }
     }
 
-    // chiamata dal trigger di uscita (meglio su OnTriggerExit)
-    public void NotifyExit(NpcCarWaypoint car)
+    public void NotifyExit(IIntersectionVehicle car)
     {
         if (car == null) return;
         if (car != currentCar) return;

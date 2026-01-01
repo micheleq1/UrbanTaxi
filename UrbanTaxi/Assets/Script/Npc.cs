@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class NpcCarWaypoint : MonoBehaviour
+public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
 {
     [Header("Waypoints")]
     public Transform[] waypoints;
