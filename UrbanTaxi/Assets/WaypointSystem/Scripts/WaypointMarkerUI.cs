@@ -26,33 +26,28 @@ namespace WrightAngle.Waypoint
         private Vector3 initialScale; // Store the initial scale of the marker from the prefab
         private Quaternion initialTextRotation = Quaternion.identity; // Store initial rotation if needed, but we'll force it upright.
 
-        private void Awake()
+       private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
-            initialScale = rectTransform.localScale; // Store the prefab's scale
-
-            // Ensure the essential icon component is assigned
-            if (markerIcon == null)
-            {
-                Debug.LogError($"<b>[{gameObject.name}] WaypointMarkerUI Error:</b> Marker Icon is not assigned in the Inspector. This is required for the marker to be visible.", this);
-                // Do not disable the whole component if text might still be used, or if icon is optional.
-                // For now, assume icon is essential for the core marker.
-                // enabled = false;
-            }
-            else
-            {
-                // Optimize performance by disabling raycast target for the icon (markers are typically non-interactive)
-                markerIcon.raycastTarget = false;
-            }
-
-            if (distanceTextElement != null)
-            {
-                distanceTextElement.raycastTarget = false;
-                // We will enforce upright rotation in UpdateDisplay, so storing initial rotation might not be strictly necessary
-                // unless you have a specific design for the text's default orientation within the prefab.
-                // Forcing Quaternion.identity relative to canvas is usually desired for readability.
-            }
+            initialScale = rectTransform.localScale;
         }
+
+        private bool TryResolveMarkerIcon()
+        {
+            if (markerIcon != null)
+                return true;
+
+            markerIcon = GetComponentInChildren<Image>(true);
+
+            if (markerIcon != null)
+            {
+                markerIcon.raycastTarget = false;
+                return true;
+            }
+
+            return false;
+        }
+
 
         /// <summary>
         /// Updates the marker's position, rotation, scale, and distance text based on the target's screen-space information and distance.
@@ -66,6 +61,15 @@ namespace WrightAngle.Waypoint
         /// <param name="distanceToTarget">The world-space distance from the camera to the waypoint target.</param>
         public void UpdateDisplay(Vector3 screenPosition, bool isOnScreen, bool isBehindCamera, Camera cam, WaypointSettings settings, float distanceToTarget)
         {
+            if (markerIcon == null)
+            {
+                if (!TryResolveMarkerIcon())
+                {
+                    // Non logghiamo errore ogni frame, semplicemente non disegniamo
+                    return;
+                }
+            }
+            
             // Safety checks for required components and settings
             if (settings == null || rectTransform == null || cam == null) // markerIcon can be null if not essential
             {
