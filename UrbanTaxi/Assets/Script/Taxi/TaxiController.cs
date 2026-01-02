@@ -1,5 +1,6 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+
 public class TaxiController : MonoBehaviour, IIntersectionVehicle
 {
     // ==========================
@@ -40,6 +41,10 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     // ==========================
     private TaxiRoadNode targetNode;
     private TaxiRoadNode previousNode;
+    public TaxiRoadNode PreviousNode
+    {
+        get { return previousNode; }
+    }
 
     // ==========================
     // MOVIMENTO PARAMETRICO
@@ -47,9 +52,17 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     private float segmentT = 0f;
     private float segmentLength = 1f;
 
-    // ==========================
-    // UNITY
-    // ==========================
+    //RL
+    public float velocitaMedia { get; private set; }
+    public float TempoFermo { get; private set; }
+    public float DistanzaDallGoal { get; private set; }
+    public float TempoTrascorso { get; private set; }
+
+    private float velocitaIstantanea;
+    private float velocitaMediaSmoothing = 0.95f;
+
+
+
     void Start()
     {
         if (currentNode == null)
@@ -108,6 +121,8 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
             if (goalNode != null && currentNode == goalNode && !reachedGoal)
             {
                 reachedGoal = true;
+                Debug.Log($"[Taxi] GOAL REACHED -> {goalNode?.name} at node {currentNode?.name}");
+
 
                 // Prepara il prossimo stato (importante!)
                 PickNextNode();
@@ -119,6 +134,41 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
 
             PickNextNode();
             InitSegment();
+
+            // ==========================
+            // RL - AGGIORNAMENTO METRICHE
+            // ==========================
+
+            // Tempo trascorso dall'inizio della corsa
+            TempoTrascorso += Time.deltaTime;
+
+            // Distanza residua dal goal
+            if (goalNode != null)
+            {
+                DistanzaDallGoal = Vector3.Distance(
+                    transform.position,
+                    goalNode.transform.position
+                );
+            }
+            else
+            {
+                DistanzaDallGoal = 0f;
+            }
+
+            // Velocità istantanea (coerente col tuo sistema)
+            bool staAvanzando = !isStopped && !IsBlockedAhead() && canEnterIntersection;
+            velocitaIstantanea = staAvanzando ? speed : 0f;
+
+            // Velocità media (media mobile → stabile per RL)
+            velocitaMedia = velocitaMedia * velocitaMediaSmoothing
+                        + velocitaIstantanea * (1f - velocitaMediaSmoothing);
+
+            // Tempo fermo (solo se davvero fermo)
+            if (velocitaIstantanea < 0.01f)
+            {
+                TempoFermo += Time.deltaTime;
+            }
+
         }
 
     }
@@ -261,19 +311,74 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
 
     public void SetGoalNode(TaxiRoadNode node)
     {
+        Debug.Log($"[Taxi] SetGoalNode -> {node?.name}");
         goalNode = node;
         reachedGoal = false;
+
+        // ==========================
+        // RL - RESET TEMPO CORSA
+        // ==========================
+        TempoTrascorso = 0f;
+        TempoFermo = 0f;
     }
+
 
     public bool HasReachedGoal()
     {
         return reachedGoal;
     }
-    // ==========================
+    
     // INCROCI (CHIAMATO DAGLI SCRIPT INCROCIO)
-    // ==========================
     public void SetIntersectionPermission(bool canEnter)
     {
         canEnterIntersection = canEnter;
     }
+
+    public List<RoadExit> GetUsciteDisponibili()
+    {
+        List<RoadExit> uscite = new List<RoadExit>();
+
+        if (currentNode == null)
+            return uscite;
+
+        foreach (TaxiRoadNode exitNode in currentNode.neighbors)
+        {
+            // Evita inversioni immediate
+            TaxiRoadNode startRoad = exitNode;
+            TaxiRoadNode endRoad = null;
+
+            foreach (var n in exitNode.neighbors)
+            {
+                if (n != currentNode)
+                {
+                    endRoad = n;
+                    break;
+                }
+            }
+
+            if (endRoad == null)
+                continue;
+
+            RoadExit uscita = new RoadExit(
+                exitNode,
+                startRoad,
+                endRoad,
+                this
+            );
+
+            uscite.Add(uscita);
+        }
+
+        return uscite;
+    }
+
+    public void SetUscitaSelezionata(RoadExit uscita)
+    {
+        if (uscita == null)
+            return;
+
+        targetNode = uscita.exitNode;
+    }
+
+
 }
