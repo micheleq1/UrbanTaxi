@@ -17,6 +17,8 @@ namespace WrightAngle.Waypoint
 
         [Tooltip("If checked, this waypoint target will automatically register itself with the WaypointUIManager when the scene starts (requires a WaypointUIManager in the scene). Uncheck to control activation manually using the ActivateWaypoint() method.")]
         public bool ActivateOnStart = true;
+        public GameObject OverrideMarkerPrefab;
+
 
         /// <summary>
         /// Indicates whether this target is currently registered and being tracked by the WaypointUIManager. (Read-Only)

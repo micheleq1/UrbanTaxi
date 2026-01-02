@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aaa2442c08b39849ba460796e1b48c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: 
+  DisplayName: Destinazione
   ActivateOnStart: 0
+  OverrideMarkerPrefab: {fileID: 5694523043190599485, guid: c0f0d6b463d5f0f4c87a71bd906c41a4, type: 3}

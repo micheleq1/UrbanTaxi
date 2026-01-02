@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: 
   ActivateOnStart: 0
+  OverrideMarkerPrefab: {fileID: 0}
 --- !u!1001 &704913139471821704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -619,7 +620,7 @@ PrefabInstance:
       addedObject: {fileID: 1366320327512348768}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f14962bf8c2a50544b362f1694bf4149, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -2146111681733959286}
+      addedObject: {fileID: 4263391266389162493}
   m_SourcePrefab: {fileID: 100100000, guid: f14962bf8c2a50544b362f1694bf4149, type: 3}
 --- !u!137 &338641922897412421 stripped
 SkinnedMeshRenderer:
@@ -782,20 +783,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-2146111681733959286
+--- !u!114 &4263391266389162493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5014500871186048516}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6aaa2442c08b39849ba460796e1b48c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayName: Passeggero
+  DisplayName: Persona
   ActivateOnStart: 1
+  OverrideMarkerPrefab: {fileID: 5694523043190599485, guid: dbed131631ac80441943307af2966853, type: 3}
 --- !u!4 &5109718552907229907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1134662855679897990, guid: f14962bf8c2a50544b362f1694bf4149, type: 3}

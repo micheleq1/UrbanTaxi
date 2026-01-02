@@ -1,5 +1,6 @@
 using UnityEngine;
 using WrightAngle.Waypoint;
+using System.Collections;
 
 public class TaxiMissionManager : MonoBehaviour
 {
@@ -27,7 +28,15 @@ public class TaxiMissionManager : MonoBehaviour
     private WaypointTarget passengerWaypoint;
     private WaypointTarget destinationWaypoint;
 
-    private enum State { GoPickup, GoDropoff }
+    //Stati della missione
+    private enum State
+    {
+        WaitingPickup,
+        GoingToPickup,
+        WaitingDropoff,
+        GoingToDropoff
+    }
+
     private State state;
 
     void Awake()
@@ -48,53 +57,85 @@ public class TaxiMissionManager : MonoBehaviour
 
     void Update()
     {
-        if (state == State.GoPickup && passengerObj.activeSelf)
+        if (taxi.HasReachedGoal())
         {
-            if (Vector3.Distance(taxi.transform.position, passengerObj.transform.position) <= pickupDistance)
+            if (state == State.GoingToPickup)
             {
-                passengerWaypoint.DeactivateWaypoint();
-                passengerObj.SetActive(false);
-
-                SpawnDestination();
+                StartCoroutine(HandlePickup());
             }
-        }
-        else if (state == State.GoDropoff && destinationObj.activeSelf)
-        {
-            if (Vector3.Distance(taxi.transform.position, destinationObj.transform.position) <= dropoffDistance)
+            else if (state == State.GoingToDropoff)
             {
-                destinationWaypoint.DeactivateWaypoint();
-                destinationObj.SetActive(false);
-
-                SpawnPassenger();
+                StartCoroutine(HandleDropoff());
             }
         }
     }
 
-    // =========================
-    // PASSENGER
-    // =========================
-    void SpawnPassenger()
+
+    IEnumerator HandlePickup()
     {
-        Transform sp = passengerSpawnPoints[Random.Range(0, passengerSpawnPoints.Length)];
-        passengerObj.transform.SetPositionAndRotation(sp.position, sp.rotation);
-        passengerObj.SetActive(true);
+        state = State.WaitingPickup;
 
-        passengerWaypoint.ActivateWaypoint();
+        passengerObj.SetActive(false); // pickup
 
-        state = State.GoPickup;
+        yield return new WaitForSeconds(0.1f); // sicurezza frame
+
+        SpawnDestination(); 
     }
 
-    // =========================
-    // DESTINATION
-    // =========================
     void SpawnDestination()
     {
         Transform dp = destinationPoints[Random.Range(0, destinationPoints.Length)];
-        destinationObj.transform.SetPositionAndRotation(dp.position, dp.rotation);
+        destinationObj.transform.position = dp.position;
+        
         destinationObj.SetActive(true);
-
         destinationWaypoint.ActivateWaypoint();
 
-        state = State.GoDropoff;
+        TaxiRoadNode dropNode = FindClosestNode(destinationObj.transform.position);
+        taxi.SetGoalNode(dropNode);
+
+        state = State.GoingToDropoff;
+    }
+
+    IEnumerator HandleDropoff()
+    {
+        state = State.WaitingDropoff;
+
+        destinationWaypoint.DeactivateWaypoint();
+        destinationObj.SetActive(false);
+        
+        yield return new WaitForSeconds(0.1f);
+        SpawnPassenger(); // nuova corsa
+    }
+
+    TaxiRoadNode FindClosestNode(Vector3 pos)
+    {
+        TaxiRoadNode[] nodes = FindObjectsOfType<TaxiRoadNode>();
+
+        TaxiRoadNode best = null;
+        float bestDist = float.MaxValue;
+
+        foreach (var n in nodes)
+        {
+            float d = Vector3.Distance(pos, n.transform.position);
+            if (d < bestDist)
+            {
+                bestDist = d;
+                best = n;
+            }
+        }
+
+        return best;
+    }
+
+    void SpawnPassenger()
+    {
+        Transform sp = passengerSpawnPoints[Random.Range(0, passengerSpawnPoints.Length)];
+        passengerObj.transform.position = sp.position;
+        passengerObj.SetActive(true);
+
+        TaxiRoadNode pickupNode = FindClosestNode(passengerObj.transform.position);
+        taxi.SetGoalNode(pickupNode);
+
+        state = State.GoingToPickup;
     }
 }

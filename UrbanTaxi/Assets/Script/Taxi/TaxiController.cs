@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class TaxiController : MonoBehaviour, IIntersectionVehicle
 {
     // ==========================
@@ -8,7 +8,8 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     [Header("Navigation")]
     public TaxiRoadNode currentNode;
     public TaxiRoadNode goalNode;
-
+    private bool isStopped = false;
+    private bool reachedGoal = false;
     public float speed = 5f;
 
     // ==========================
@@ -64,6 +65,8 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
 
     void Update()
     {
+        if (isStopped) return;
+
         if (targetNode == null) return;
 
         bool blockedByTraffic = IsBlockedAhead();
@@ -94,9 +97,30 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         {
             previousNode = currentNode;
             currentNode = targetNode;
+
+            // Snap preciso sul nodo
+            transform.position = currentNode.transform.position
+                        + Vector3.Cross(Vector3.up,
+                            (targetNode.transform.position - previousNode.transform.position).normalized
+                        ) * laneOffset;
+
+            // Ho raggiunto il goal?
+            if (goalNode != null && currentNode == goalNode && !reachedGoal)
+            {
+                reachedGoal = true;
+
+                // Prepara il prossimo stato (importante!)
+                PickNextNode();
+                InitSegment();
+
+                StopForSeconds(5f);
+                return;
+            }
+
             PickNextNode();
             InitSegment();
         }
+
     }
 
     // ==========================
@@ -130,9 +154,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
             return;
         }
 
-        // ==========================
-        // CASO 2: HO UN OBIETTIVO → avvicinati al goal
-        // ==========================
+        // CASO 2: il taxi cerca di avvicinarsi al goalNode
         TaxiRoadNode bestNode = null;
         float bestDistance = float.MaxValue;
 
@@ -223,6 +245,30 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         return false;
     }
 
+
+    public void StopForSeconds(float seconds)
+    {
+        if (!gameObject.activeInHierarchy) return;
+        StartCoroutine(StopCoroutine(seconds));
+    }
+
+    private System.Collections.IEnumerator StopCoroutine(float seconds)
+    {
+        isStopped = true;
+        yield return new WaitForSeconds(seconds);
+        isStopped = false;      
+    }
+
+    public void SetGoalNode(TaxiRoadNode node)
+    {
+        goalNode = node;
+        reachedGoal = false;
+    }
+
+    public bool HasReachedGoal()
+    {
+        return reachedGoal;
+    }
     // ==========================
     // INCROCI (CHIAMATO DAGLI SCRIPT INCROCIO)
     // ==========================

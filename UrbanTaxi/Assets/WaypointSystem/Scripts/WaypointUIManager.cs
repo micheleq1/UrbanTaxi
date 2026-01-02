@@ -152,10 +152,24 @@ namespace WrightAngle.Waypoint
                     // --- Get or Activate Marker ---
                     // Try to get an existing marker; if none exists, retrieve one from the pool.
                     if (!activeMarkers.TryGetValue(target, out WaypointMarkerUI markerInstance))
-                    {
-                        markerInstance = markerPool.Get(); // Get from pool (activates the GameObject).
-                        activeMarkers.Add(target, markerInstance); // Associate the new marker with the target.
-                    }
+                        {
+                            markerInstance = markerPool.Get();
+
+                            // 🔑 QUI scegliamo il prefab corretto
+                            GameObject prefabToUse =
+                                target.OverrideMarkerPrefab != null
+                                    ? target.OverrideMarkerPrefab
+                                    : settings.GetMarkerPrefab();
+
+                            // Distruggi eventuale grafica precedente
+                            foreach (Transform child in markerInstance.transform)
+                                Destroy(child.gameObject);
+
+                            // Istanzia il marker grafico corretto
+                            Instantiate(prefabToUse, markerInstance.transform);
+
+                            activeMarkers.Add(target, markerInstance);
+                        }
                     // Ensure the marker's GameObject is active (could be inactive if just retrieved from pool).
                     if (!markerInstance.gameObject.activeSelf) markerInstance.gameObject.SetActive(true);
 
@@ -266,32 +280,29 @@ namespace WrightAngle.Waypoint
 
         /// <summary> Sets up the Object Pool for creating and reusing WaypointMarkerUI instances. </summary>
         private void InitializePool()
+{
+    markerPool = new ObjectPool<WaypointMarkerUI>(
+        createFunc: () =>
         {
-            // Get the prefab configured in settings (already validated in Awake).
-            GameObject prefab = settings.GetMarkerPrefab();
-            if (prefab == null) return; // Safety check.
+            // ⚠️ Il prefab viene deciso DOPO, per target
+            GameObject go = new GameObject("WaypointMarker");
+            go.transform.SetParent(markerParentCanvas);
 
-            markerPool = new ObjectPool<WaypointMarkerUI>(
-                createFunc: () => { // Defines how to create a new marker instance when the pool is empty.
-                    GameObject go = Instantiate(prefab, markerParentCanvas);
-                    WaypointMarkerUI ui = go.GetComponent<WaypointMarkerUI>();
-                    // Add the script if missing on the prefab (for robustness).
-                    if (ui == null)
-                    {
-                        ui = go.AddComponent<WaypointMarkerUI>();
-                        Debug.LogWarning($"WaypointUIManager: Added missing WaypointMarkerUI script to '{prefab.name}' instance.", go);
-                    }
-                    go.SetActive(false); // Ensure new instances start inactive.
-                    return ui;
-                },
-                actionOnGet: (marker) => marker.gameObject.SetActive(true),    // Action performed when an item is taken from the pool.
-                actionOnRelease: (marker) => marker.gameObject.SetActive(false), // Action performed when an item is returned to the pool.
-                actionOnDestroy: (marker) => { if (marker != null) Destroy(marker.gameObject); }, // Action performed when the pool destroys an item.
-                collectionCheck: true, // Adds extra checks in editor builds to detect pool corruption issues.
-                defaultCapacity: 10,   // Initial number of items the pool can hold.
-                maxSize: 100         // Maximum number of items the pool will store.
-            );
-        }
+            WaypointMarkerUI ui = go.AddComponent<WaypointMarkerUI>();
+            go.SetActive(false);
+            return ui;
+        },
+        actionOnGet: (marker) => marker.gameObject.SetActive(true),
+        actionOnRelease: (marker) => marker.gameObject.SetActive(false),
+        actionOnDestroy: (marker) =>
+        {
+            if (marker != null) Destroy(marker.gameObject);
+        },
+        collectionCheck: true,
+        defaultCapacity: 10,
+        maxSize: 100
+    );
+}
 
         // --- Target Event Handlers ---
 
