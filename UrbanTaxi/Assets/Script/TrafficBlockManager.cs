@@ -11,7 +11,7 @@ public class TrafficBlockageSinglePoint : MonoBehaviour
 
     [Header("Timing")]
     public float spawnIntervalSeconds = 60f;
-    public float activeDurationSeconds = 30f;
+    public float activeDurationSeconds = 15f;
 
     [Header("Options")]
     public bool avoidSamePointTwice = true;
@@ -36,7 +36,7 @@ public class TrafficBlockageSinglePoint : MonoBehaviour
     private GameObject blockageObj;
     private int lastPointIndex = -1;
 
-    // dati “ingombro” dal collider del prefab
+    // dati ï¿½ingombroï¿½ dal collider del prefab
     private Vector3 checkCenterLocal = Vector3.zero;
     private Vector3 checkHalfExtentsLocal = new Vector3(2f, 1f, 2f);
 
