@@ -61,7 +61,7 @@ public class TaxiMissionManager : MonoBehaviour
     /*IEnumerator SetTimeScaleDelayed()
     {
         yield return null; // aspetta 1 frame
-        Time.timeScale = 10f;
+        Time.timeScale = 3f;
     }*/
 
     void Update()
