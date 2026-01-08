@@ -202,7 +202,8 @@ public class TaxiAgent : Agent
         float delta = prevDistToGoal - newDist; // >0 se ti avvicini
 
         // reward proporzionale al progresso (normalizzato)
-        AddReward(0.2f * (delta / MaxMapDist));
+        float shaped = Mathf.Clamp(delta / MaxMapDist, -1f, 1f);
+        AddReward(0.2f * shaped);
 
         prevDistToGoal = newDist;
     }

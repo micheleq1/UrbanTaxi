@@ -1,0 +1,65 @@
+{
+    "AgenteTaxi": {
+        "checkpoints": [
+            {
+                "steps": 1415,
+                "file_path": "results\\run17\\AgenteTaxi\\AgenteTaxi-1415.onnx",
+                "reward": -0.027544990181922913,
+                "creation_time": 1767878304.8997371,
+                "auxillary_file_paths": [
+                    "results\\run17\\AgenteTaxi\\AgenteTaxi-1415.pt"
+                ]
+            },
+            {
+                "steps": 9506,
+                "file_path": "results\\run17\\AgenteTaxi\\AgenteTaxi-9506.onnx",
+                "reward": -2.6725785500473447,
+                "creation_time": 1767880711.4018993,
+                "auxillary_file_paths": [
+                    "results\\run17\\AgenteTaxi\\AgenteTaxi-9506.pt"
+                ]
+            },
+            {
+                "steps": 10397,
+                "file_path": "results\\run17\\AgenteTaxi\\AgenteTaxi-10397.onnx",
+                "reward": -0.2095575382312139,
+                "creation_time": 1767881276.571649,
+                "auxillary_file_paths": [
+                    "results\\run17\\AgenteTaxi\\AgenteTaxi-10397.pt"
+                ]
+            },
+            {
+                "steps": 10397,
+                "file_path": "results\\run17\\AgenteTaxi\\AgenteTaxi-10397.onnx",
+                "reward": null,
+                "creation_time": 1767881529.2747684,
+                "auxillary_file_paths": [
+                    "results\\run17\\AgenteTaxi\\AgenteTaxi-10397.pt"
+                ]
+            },
+            {
+                "steps": 10584,
+                "file_path": "results\\run17\\AgenteTaxi\\AgenteTaxi-10584.onnx",
+                "reward": 1.2730373740196228,
+                "creation_time": 1767881714.7708166,
+                "auxillary_file_paths": [
+                    "results\\run17\\AgenteTaxi\\AgenteTaxi-10584.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10584,
+            "file_path": "results\\run17\\AgenteTaxi.onnx",
+            "reward": 1.2730373740196228,
+            "creation_time": 1767881714.7708166,
+            "auxillary_file_paths": [
+                "results\\run17\\AgenteTaxi\\AgenteTaxi-10584.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

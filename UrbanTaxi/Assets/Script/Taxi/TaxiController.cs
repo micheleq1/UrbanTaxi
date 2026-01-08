@@ -61,6 +61,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
 
         if (!blockedByTraffic && !blockedByIntersection)
         {
+            
             segmentT += (speed / segmentLength) * Time.deltaTime;
             segmentT = Mathf.Clamp01(segmentT);
         }
@@ -76,18 +77,18 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
             previousNode = currentNode;
             currentNode = targetNode;
             targetNode = null;
-            agent?.OnNodeReached();
+            
             transform.position = currentNode.transform.position
                 + Vector3.Cross(Vector3.up, dir) * laneOffset;
 
             if (goalNode != null && currentNode == goalNode && !reachedGoal)
             {
                 reachedGoal = true;
-                agent.OnReachedGoal();
+                agent?.OnReachedGoal();
                 StopForSeconds(5f);
                 return;
             }
-
+            agent?.OnNodeReached();
             RequestAgentDecision();
         }
     }

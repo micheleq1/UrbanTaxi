@@ -1,0 +1,29 @@
+{
+    "AgenteTaxi": {
+        "checkpoints": [
+            {
+                "steps": 1170,
+                "file_path": "results\\run13\\AgenteTaxi\\AgenteTaxi-1170.onnx",
+                "reward": -0.1662454324610093,
+                "creation_time": 1767874061.5240226,
+                "auxillary_file_paths": [
+                    "results\\run13\\AgenteTaxi\\AgenteTaxi-1170.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1170,
+            "file_path": "results\\run13\\AgenteTaxi.onnx",
+            "reward": -0.1662454324610093,
+            "creation_time": 1767874061.5240226,
+            "auxillary_file_paths": [
+                "results\\run13\\AgenteTaxi\\AgenteTaxi-1170.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}
