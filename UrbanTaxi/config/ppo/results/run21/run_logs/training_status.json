@@ -1,0 +1,38 @@
+{
+    "AgenteTaxi": {
+        "checkpoints": [
+            {
+                "steps": 167694,
+                "file_path": "results\\run21\\AgenteTaxi\\AgenteTaxi-167694.onnx",
+                "reward": 9.532914171756154,
+                "creation_time": 1767895485.4514835,
+                "auxillary_file_paths": [
+                    "results\\run21\\AgenteTaxi\\AgenteTaxi-167694.pt"
+                ]
+            },
+            {
+                "steps": 252680,
+                "file_path": "results\\run21\\AgenteTaxi\\AgenteTaxi-252680.onnx",
+                "reward": 9.511155806417051,
+                "creation_time": 1767901952.9473917,
+                "auxillary_file_paths": [
+                    "results\\run21\\AgenteTaxi\\AgenteTaxi-252680.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 252680,
+            "file_path": "results\\run21\\AgenteTaxi.onnx",
+            "reward": 9.511155806417051,
+            "creation_time": 1767901952.9473917,
+            "auxillary_file_paths": [
+                "results\\run21\\AgenteTaxi\\AgenteTaxi-252680.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

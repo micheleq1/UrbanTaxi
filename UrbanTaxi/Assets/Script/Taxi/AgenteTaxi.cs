@@ -117,7 +117,7 @@ public class TaxiAgent : Agent
         // azione non valida
         if (action < 0 || action >= neighbors.Count)
         {
-            AddEpisodeReward(-0.02f);
+            //AddEpisodeReward(-0.02f); 
             action = 0;
         }
 
@@ -139,6 +139,12 @@ public class TaxiAgent : Agent
         }
 
         taxi.SetTargetNode(chosen);
+    }
+
+    private void FixedUpdate()
+    {
+        if (StepCount > 0)
+            AddEpisodeReward(-0.003f*Time.fixedDeltaTime);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -188,10 +194,10 @@ public class TaxiAgent : Agent
             taxi.goalNode.transform.position
         );
 
-        float delta = prevDistToGoal - newDist; // >0 se ti avvicini
+        float delta = prevDistToGoal - newDist; // >0 se ti avvicin
 
-        float shaped = Mathf.Clamp(delta / MaxMapDist, -1f, 1f);
-        AddEpisodeReward(0.2f * shaped);
+            float shaped = Mathf.Clamp(delta / MaxMapDist, -1f, 1f);
+            AddEpisodeReward(0.35f * shaped);
 
         prevDistToGoal = newDist;
     }
