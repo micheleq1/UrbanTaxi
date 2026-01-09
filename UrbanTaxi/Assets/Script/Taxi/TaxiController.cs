@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class TaxiController : MonoBehaviour, IIntersectionVehicle
 {
     [Header("Navigation")]
@@ -31,6 +33,18 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     private bool canEnterIntersection = true;
 
     private TaxiAgent agent;
+    private Rigidbody rb;
+
+    // ==========================
+    // UNITY
+    // ==========================
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+    }
 
     void Start()
     {
@@ -46,6 +60,9 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         RequestAgentDecision();
     }
 
+    // ==========================
+    // UPDATE → SOLO LOGICA
+    // ==========================
     void Update()
     {
         if (isStopped) return;
@@ -53,33 +70,43 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         if (targetNode == null)
         {
             RequestAgentDecision();
-            return;
         }
+    }
+
+    // ==========================
+    // FIXEDUPDATE → SOLO FISICA
+    // ==========================
+    void FixedUpdate()
+    {
+        if (isStopped) return;
+        if (targetNode == null) return;
 
         bool blockedByTraffic = IsBlockedAhead();
         bool blockedByIntersection = !canEnterIntersection;
 
         if (!blockedByTraffic && !blockedByIntersection)
         {
-            
-            segmentT += (speed / segmentLength) * Time.deltaTime;
+            segmentT += (speed / segmentLength) * Time.fixedDeltaTime;
             segmentT = Mathf.Clamp01(segmentT);
         }
 
-        transform.position = GetSegmentPosition(segmentT);
+        Vector3 newPos = GetSegmentPosition(segmentT);
+        rb.MovePosition(newPos);
 
         Vector3 dir = (targetNode.transform.position - currentNode.transform.position).normalized;
         if (dir.sqrMagnitude > 0.0001f)
-            transform.forward = dir;
+            rb.MoveRotation(Quaternion.LookRotation(dir));
 
         if (segmentT >= 1f)
         {
             previousNode = currentNode;
             currentNode = targetNode;
             targetNode = null;
-            
-            transform.position = currentNode.transform.position
-                + Vector3.Cross(Vector3.up, dir) * laneOffset;
+
+            rb.MovePosition(
+                currentNode.transform.position +
+                Vector3.Cross(Vector3.up, dir) * laneOffset
+            );
 
             if (goalNode != null && currentNode == goalNode && !reachedGoal)
             {
@@ -88,16 +115,18 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
                 StopForSeconds(5f);
                 return;
             }
+
             agent?.OnNodeReached();
             RequestAgentDecision();
         }
     }
 
+    // ==========================
     // AGENT INTERACTION
+    // ==========================
     void RequestAgentDecision()
     {
-        if (agent != null)
-            agent.RequestDecision();
+        agent?.RequestDecision();
     }
 
     public void SetTargetNode(TaxiRoadNode node)
@@ -109,11 +138,13 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         segmentT = 0f;
         segmentLength = Mathf.Max(
             0.01f,
-            Vector3.Distance(currentNode.transform.position, targetNode.transform.position)
+            Vector3.Distance(currentNode.transform.position, node.transform.position)
         );
     }
 
+    // ==========================
     // MOVEMENT HELPERS
+    // ==========================
     Vector3 GetSegmentPosition(float t)
     {
         Vector3 start = currentNode.transform.position;
@@ -125,7 +156,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
 
     bool IsBlockedAhead()
     {
-        Vector3 origin = transform.position
+        Vector3 origin = rb.position
                        + Vector3.up * sensorHeight
                        + transform.forward * sensorForwardOffset;
 
@@ -150,7 +181,6 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     }
 
     public bool HasReachedGoal() => reachedGoal;
-
     public void ClearReachedGoal() => reachedGoal = false;
 
     public void SetIntersectionPermission(bool canEnter)
@@ -160,7 +190,9 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
 
     public TaxiRoadNode PreviousNode => previousNode;
 
+    // ==========================
     // STOP
+    // ==========================
     public void StopForSeconds(float seconds)
     {
         if (!gameObject.activeInHierarchy) return;

@@ -567,7 +567,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -1048,7 +1047,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -2211,7 +2209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 93d0d450ec8b42e46b724bf2bbee330b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 93d0d450ec8b42e46b724bf2bbee330b, type: 3}
       propertyPath: m_RootOrder
@@ -3013,7 +3011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
       propertyPath: m_RootOrder
@@ -5506,7 +5504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: m_RootOrder
@@ -12229,7 +12227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: m_RootOrder
@@ -16410,7 +16408,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -16521,7 +16518,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -17689,7 +17685,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -17971,7 +17966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
       propertyPath: m_RootOrder
@@ -18419,7 +18414,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -19957,7 +19951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 288b117258616aa4f928ba6f91dc47c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 288b117258616aa4f928ba6f91dc47c3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21347,7 +21341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21736,7 +21730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 288b117258616aa4f928ba6f91dc47c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 288b117258616aa4f928ba6f91dc47c3, type: 3}
       propertyPath: m_RootOrder
@@ -22495,7 +22489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
       propertyPath: m_RootOrder
@@ -23850,7 +23844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: c98da428142c39c42bb62c454958cd1f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c98da428142c39c42bb62c454958cd1f, type: 3}
       propertyPath: m_RootOrder
@@ -24211,7 +24205,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -24649,7 +24642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 93d0d450ec8b42e46b724bf2bbee330b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 93d0d450ec8b42e46b724bf2bbee330b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24872,7 +24865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 81c050d9e127fdd45af1f6b8da476b2b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 81c050d9e127fdd45af1f6b8da476b2b, type: 3}
       propertyPath: m_RootOrder
@@ -25995,7 +25988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a119eb0fa059db34bbaef286c1af1696, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a119eb0fa059db34bbaef286c1af1696, type: 3}
       propertyPath: m_RootOrder
@@ -30352,7 +30345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1af0a2c8773f85c40bdb120f32cd8a8a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1af0a2c8773f85c40bdb120f32cd8a8a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31973,7 +31966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a119eb0fa059db34bbaef286c1af1696, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a119eb0fa059db34bbaef286c1af1696, type: 3}
       propertyPath: m_RootOrder
@@ -33680,7 +33673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e218686c5655fad46a02ebfb004972ee, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e218686c5655fad46a02ebfb004972ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35957,7 +35950,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -36729,7 +36721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 93d0d450ec8b42e46b724bf2bbee330b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 93d0d450ec8b42e46b724bf2bbee330b, type: 3}
       propertyPath: m_RootOrder
@@ -36924,7 +36916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 00d77ce56096de34eb6645947a0f8925, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 00d77ce56096de34eb6645947a0f8925, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37656,7 +37648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 288b117258616aa4f928ba6f91dc47c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 288b117258616aa4f928ba6f91dc47c3, type: 3}
       propertyPath: m_RootOrder
@@ -39207,7 +39199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e218686c5655fad46a02ebfb004972ee, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e218686c5655fad46a02ebfb004972ee, type: 3}
       propertyPath: m_RootOrder
@@ -40368,7 +40360,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -41006,7 +40997,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -41604,7 +41594,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -41652,7 +41641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42471,7 +42460,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -43209,7 +43197,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -43299,7 +43286,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -43710,7 +43696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 81c050d9e127fdd45af1f6b8da476b2b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 81c050d9e127fdd45af1f6b8da476b2b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -44723,7 +44709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 93d0d450ec8b42e46b724bf2bbee330b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 93d0d450ec8b42e46b724bf2bbee330b, type: 3}
       propertyPath: m_RootOrder
@@ -45486,7 +45472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 81c050d9e127fdd45af1f6b8da476b2b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 81c050d9e127fdd45af1f6b8da476b2b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46114,7 +46100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 9500f0cdde0097a4aac35ced7c1935d7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9500f0cdde0097a4aac35ced7c1935d7, type: 3}
       propertyPath: m_RootOrder
@@ -46265,7 +46251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 00d77ce56096de34eb6645947a0f8925, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 00d77ce56096de34eb6645947a0f8925, type: 3}
       propertyPath: m_RootOrder
@@ -47513,7 +47499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: ce2dd4bb67fdc684dac928dc2cfb7a0f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ce2dd4bb67fdc684dac928dc2cfb7a0f, type: 3}
       propertyPath: m_RootOrder
@@ -48326,7 +48312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
       propertyPath: m_RootOrder
@@ -48558,7 +48544,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -49201,7 +49186,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -49462,7 +49446,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -55460,7 +55443,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -56650,7 +56632,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -64964,7 +64945,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -65544,7 +65524,6 @@ MonoBehaviour:
   sensorLength: 8
   stopDistance: 5
   sensorHeight: 0.6
-  brakeStrength: 8
   sensorRadius: 0.6
   sensorForwardOffset: 0.5
   incidentCheckInterval: 20
@@ -72212,7 +72191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1af0a2c8773f85c40bdb120f32cd8a8a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1af0a2c8773f85c40bdb120f32cd8a8a, type: 3}
       propertyPath: m_RootOrder
@@ -72560,7 +72539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 00d77ce56096de34eb6645947a0f8925, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 00d77ce56096de34eb6645947a0f8925, type: 3}
       propertyPath: m_RootOrder
@@ -73849,7 +73828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1af0a2c8773f85c40bdb120f32cd8a8a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1af0a2c8773f85c40bdb120f32cd8a8a, type: 3}
       propertyPath: m_LocalPosition.x

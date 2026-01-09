@@ -54,15 +54,15 @@ public class TaxiMissionManager : MonoBehaviour
     {
         SpawnPassenger();
         lastState = state;
-        //StartCoroutine(SetTimeScaleDelayed());
+        StartCoroutine(SetTimeScaleDelayed());
     }
 
 
-    /*IEnumerator SetTimeScaleDelayed()
+    IEnumerator SetTimeScaleDelayed()
     {
         yield return null; // aspetta 1 frame
-        Time.timeScale = 3f;
-    }*/
+        Time.timeScale = 10f;
+    }
 
     void Update()
     {
