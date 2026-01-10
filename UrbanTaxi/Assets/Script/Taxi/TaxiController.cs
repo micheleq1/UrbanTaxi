@@ -112,7 +112,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
             {
                 reachedGoal = true;
                 agent?.OnReachedGoal();
-                StopForSeconds(5f);
+                StopForSeconds(2f);
                 return;
             }
 
@@ -193,16 +193,35 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     // ==========================
     // STOP
     // ==========================
-    public void StopForSeconds(float seconds)
-    {
-        if (!gameObject.activeInHierarchy) return;
-        StartCoroutine(StopCoroutine(seconds));
-    }
+public void StopForSeconds(float seconds)
+{
+    if (!gameObject.activeInHierarchy) return;
+    StartCoroutine(StopCoroutine(seconds));
+}
 
-    System.Collections.IEnumerator StopCoroutine(float seconds)
-    {
-        isStopped = true;
-        yield return new WaitForSeconds(seconds);
-        isStopped = false;
-    }
+System.Collections.IEnumerator StopCoroutine(float seconds)
+{
+    isStopped = true;
+
+    // Salva stato Rigidbody
+    Vector3 savedVelocity = rb.velocity;
+    Vector3 savedAngular = rb.angularVelocity;
+    bool savedKinematic = rb.isKinematic;
+
+    // Congela fisica
+    rb.velocity = Vector3.zero;
+    rb.angularVelocity = Vector3.zero;
+    rb.isKinematic = true;
+
+    // Attende in tempo reale (non influenzato da timeScale)
+    yield return new WaitForSecondsRealtime(seconds);
+
+    // Ripristina fisica
+    rb.isKinematic = savedKinematic;
+    rb.velocity = Vector3.zero;
+    rb.angularVelocity = Vector3.zero;
+
+    isStopped = false;
+}
+
 }

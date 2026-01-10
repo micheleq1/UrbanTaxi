@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1768047597",
+        "python_version": "3.10.12 | packaged by Anaconda, Inc. | (main, Jul  5 2023, 19:01:18) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\Alber\\miniconda3\\envs\\mlagents\\Scripts\\mlagents-learn taxi_config.yml --run-id=AllenamentoFunzionante9 --no-graphics",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.2.2+cu121",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1768047671"
+    },
+    "total": 73.91114620002918,
+    "count": 1,
+    "self": 0.01819410000462085,
+    "children": {
+        "run_training.setup": {
+            "total": 0.26579560001846403,
+            "count": 1,
+            "self": 0.26579560001846403
+        },
+        "TrainerController.start_learning": {
+            "total": 73.6271565000061,
+            "count": 1,
+            "self": 0.0004656000528484583,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 73.62665760004893,
+                    "count": 1,
+                    "self": 73.62665760004893
+                },
+                "TrainerController._save_models": {
+                    "total": 3.329990431666374e-05,
+                    "count": 1,
+                    "self": 3.329990431666374e-05
+                }
+            }
+        }
+    }
+}
