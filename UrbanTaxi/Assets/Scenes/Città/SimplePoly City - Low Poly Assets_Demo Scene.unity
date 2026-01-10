@@ -43479,7 +43479,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
-  sensorLength: 8
+  sensorLength: 100
   stopDistance: 6
   sensorHeight: 0.6
   sensorRadius: 0.6

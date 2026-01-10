@@ -24,10 +24,16 @@ public class TaxiAgent : Agent
     [Header("Gizmos")]
     public bool drawBranchGizmos = true;
     public bool branchGizmosOnlyWhenPlaying = true;
+    private Rigidbody selfRb;
+    private readonly bool[] lastBlockedObs = new bool[4];
+    private readonly TaxiRoadNode[] lastNeighbors = new TaxiRoadNode[4];
+    private int lastObsFrame = -999999;
+
 
     public override void Initialize()
     {
         taxi = GetComponent<TaxiController>();
+        selfRb = GetComponent<Rigidbody>();
     }
 
     public override void OnEpisodeBegin()
@@ -67,9 +73,10 @@ public class TaxiAgent : Agent
 
         for (int i = 0; i < 4; i++)
         {
-            if (i < neighbors.Count)
+            if (neighbors != null && i < neighbors.Count && neighbors[i] != null)
             {
                 TaxiRoadNode n = neighbors[i];
+                lastNeighbors[i] = n;
 
                 Vector3 toN = n.transform.position - taxi.transform.position;
                 Vector3 toNLocal = taxi.transform.InverseTransformDirection(toN.normalized);
@@ -82,59 +89,68 @@ public class TaxiAgent : Agent
                 sensor.AddObservation(Mathf.Clamp(improvement, -1f, 1f));
 
                 bool blocked = IsChoiceBlocked(taxi.currentNode, n);
+                lastBlockedObs[i] = blocked;
+                if (lastBlockedObs[i] == true)
+                    Debug.Log("strada chiusa +" + i);
+
                 sensor.AddObservation(blocked ? 1f : 0f);
             }
             else
             {
+                lastNeighbors[i] = null;
+                lastBlockedObs[i] = false;
+
                 sensor.AddObservation(0f);
                 sensor.AddObservation(0f);
                 sensor.AddObservation(0f);
                 sensor.AddObservation(0f);
             }
         }
+
+        // ✅ segna il frame ESATTO in cui hai calcolato i branch
+        lastObsFrame = Time.frameCount;
     }
 
     public override void OnActionReceived(ActionBuffers actions)
+{
+    decisionSteps++;
+
+    if (decisionSteps > maxDecisionSteps)
     {
-        decisionSteps++;
-
-        if (decisionSteps > maxDecisionSteps)
-        {
-            AddEpisodeReward(timeoutPenalty);
-            EndEpisode();
-            return;
-        }
-
-        if (taxi == null || taxi.currentNode == null) return;
-
-        int action = actions.DiscreteActions[0];
-
-        List<TaxiRoadNode> neighbors = GetSortedNeighbors(taxi.currentNode);
-        if (neighbors == null || neighbors.Count == 0) return;
-
-        if (action < 0 || action >= neighbors.Count)
-            action = 0;
-
-        TaxiRoadNode chosen = neighbors[action];
-
-        if (chosen == taxi.PreviousNode)
-        {
-            AddEpisodeReward(-0.05f);
-            for (int i = 0; i < neighbors.Count; i++)
-            {
-                if (neighbors[i] != taxi.PreviousNode)
-                {
-                    chosen = neighbors[i];
-                    break;
-                }
-            }
-        }
-
-        bool blocked = IsChoiceBlocked(taxi.currentNode, chosen);
-        AddEpisodeReward(blocked ? -0.3f : 0f);
-
-        taxi.SetTargetNode(chosen);
+        AddEpisodeReward(timeoutPenalty);
+        EndEpisode();
+        return;
     }
+
+    if (taxi == null || taxi.currentNode == null) return;
+
+    int action = actions.DiscreteActions[0];
+
+    List<TaxiRoadNode> neighbors = GetSortedNeighbors(taxi.currentNode);
+    if (neighbors == null || neighbors.Count == 0) return;
+
+    if (action < 0 || action >= neighbors.Count)
+        action = 0;
+
+    TaxiRoadNode chosen = neighbors[action];
+
+    if (chosen == taxi.PreviousNode)
+    {
+        AddEpisodeReward(-0.05f);
+    }
+
+    // ✅ USA SOLO L’OSSERVAZIONE MEMORIZZATA
+    bool blocked = lastBlockedObs[action];
+
+        if (blocked)
+        {
+            Debug.Log("penalità per strada chiusa");
+            AddEpisodeReward(-0.3f);
+        }
+
+    taxi.SetTargetNode(chosen);
+}
+
 
     private void FixedUpdate()
     {
@@ -203,39 +219,70 @@ public class TaxiAgent : Agent
     // Ramo normale (limitato da sensorLength)
     private bool IsBranchBlocked(TaxiRoadNode from, TaxiRoadNode to)
     {
-        Vector3 a = from.transform.position;
-        Vector3 b = to.transform.position;
+        if (taxi == null) taxi = GetComponent<TaxiController>();
+        if (taxi == null || from == null || to == null) return false;
 
-        Vector3 dir = (b - a).normalized;
-        float len = Mathf.Min(taxi.sensorLength, Vector3.Distance(a, b));
+        // Punto reale del taxi (in corsia)
+        Vector3 taxiPos = transform.position;
 
-        Vector3 origin = a + Vector3.up * taxi.sensorHeight + dir * taxi.sensorForwardOffset;
+        // Direzione centrale del segmento (serve per calcolare la "destra" della strada)
+        Vector3 segDir = (to.transform.position - from.transform.position).normalized;
+        if (segDir.sqrMagnitude < 0.0001f) return false;
+
+        // Vettore right della strada
+        Vector3 roadRight = Vector3.Cross(Vector3.up, segDir).normalized;
+
+        // Determina su quale lato corsia sta il taxi (così l'offset va dalla parte giusta)
+        float sideSign = Mathf.Sign(Vector3.Dot(taxiPos - from.transform.position, roadRight));
+        if (sideSign == 0f) sideSign = 1f;
+
+        // Punto "to" spostato in corsia (non al centro strada)
+        Vector3 toLanePos = to.transform.position + roadRight * taxi.laneOffset * sideSign;
+
+        // ✅ Origine come TaxiController: dal taxi + altezza + un filo avanti nella direzione della corsia
+        Vector3 dir = (toLanePos - taxiPos).normalized;
+
+        Vector3 origin = taxiPos
+                       + Vector3.up * taxi.sensorHeight
+                       + dir * taxi.sensorForwardOffset;
 
         LayerMask mask = taxi.carLayer | taxi.obstacleLayer;
+
+        // ✅ Lunghezza fissa: non dipende dal nodo
+        float distToNode = Vector3.Distance(origin, toLanePos);
+        float castLen = Mathf.Min(taxi.sensorLength, distToNode);
+        if (castLen <= 0.01f) return false;
 
         RaycastHit[] hits = Physics.SphereCastAll(
             origin,
             taxi.sensorRadius,
             dir,
-            len,
+            castLen,
             mask,
             QueryTriggerInteraction.Ignore
         );
 
-        if (hits.Length == 0) return false;
+        if (hits == null || hits.Length == 0) return false;
 
         System.Array.Sort(hits, (h1, h2) => h1.distance.CompareTo(h2.distance));
 
         foreach (var hit in hits)
         {
+            // ignora il taxi stesso
+            if (hit.collider != null && hit.collider.transform.IsChildOf(transform))
+                continue;
+
+            // ostacolo statico
             if (hit.rigidbody == null) return true;
 
-            float fwdSpeed = Vector3.Dot(hit.rigidbody.velocity, dir);
-            if (fwdSpeed < STOPPED_SPEED) return true;
+            // auto ferma (consiglio: magnitude, evita falsi positivi)
+            float speed = hit.rigidbody.velocity.magnitude;
+            if (speed < STOPPED_SPEED) return true;
         }
 
         return false;
     }
+
 
     // Strada completa StreetStart → StreetEnd
     private bool IsFullStreetBlocked(TaxiRoadNode from, TaxiRoadNode to)
@@ -265,6 +312,10 @@ public class TaxiAgent : Agent
 
         foreach (var hit in hits)
         {
+            // ✅ ignora il taxi stesso
+            if (hit.collider != null && hit.collider.transform.IsChildOf(transform))
+                continue;
+
             if (hit.rigidbody == null) return true;
 
             float fwdSpeed = Vector3.Dot(hit.rigidbody.velocity, dir);
@@ -318,55 +369,57 @@ public class TaxiAgent : Agent
         if (taxi == null || taxi.currentNode == null) return;
         if (branchGizmosOnlyWhenPlaying && !Application.isPlaying) return;
 
-        List<TaxiRoadNode> neighbors = GetSortedNeighbors(taxi.currentNode);
-        if (neighbors.Count == 0) return;
+        // ✅ disegna SOLO nel frame in cui CollectObservations ha calcolato i neighbor
+        if (Time.frameCount != lastObsFrame)
+            return;
 
-        foreach (TaxiRoadNode next in neighbors)
+        for (int i = 0; i < 4; i++)
         {
-            bool blocked = IsChoiceBlocked(taxi.currentNode, next);
-            Gizmos.color = blocked ? Color.red : Color.green;
+            TaxiRoadNode to = lastNeighbors[i];
+            if (to == null) continue;
 
-            if (taxi.currentNode.nodeType == RoadNodeType.IntersectionCenter)
-            {
-                // ramo corto centro → uscita
-                DrawRaySegment(taxi.currentNode, next, taxi.sensorLength);
+            Gizmos.color = lastBlockedObs[i] ? Color.red : Color.green;
 
-                // strada lunga dopo uscita
-                TaxiRoadNode streetStart = null;
-                TaxiRoadNode streetEnd = null;
-
-                foreach (var n in next.neighbors)
-                    if (n.nodeType == RoadNodeType.StreetStart)
-                        streetStart = n;
-
-                if (streetStart != null)
-                    foreach (var n in streetStart.neighbors)
-                        if (n.nodeType == RoadNodeType.StreetEnd)
-                            streetEnd = n;
-
-                if (streetStart != null && streetEnd != null)
-                    DrawRaySegment(streetStart, streetEnd, Vector3.Distance(streetStart.transform.position, streetEnd.transform.position));
-            }
-            else
-            {
-                DrawRaySegment(taxi.currentNode, next, taxi.sensorLength);
-            }
+            // disegna la stessa geometria del sensore (ma SENZA rifare cast)
+            DrawRaySegmentLane(taxi.currentNode, to, taxi.sensorLength);
         }
     }
 
-    private void DrawRaySegment(TaxiRoadNode from, TaxiRoadNode to, float length)
+
+
+    private void DrawRaySegmentLane(TaxiRoadNode from, TaxiRoadNode to, float length)
     {
-        Vector3 a = from.transform.position;
-        Vector3 b = to.transform.position;
+        if (taxi == null || from == null || to == null) return;
 
-        Vector3 dir = (b - a).normalized;
-        float len = Mathf.Min(length, Vector3.Distance(a, b));
+        Vector3 taxiPos = transform.position;
 
-        Vector3 origin = a + Vector3.up * taxi.sensorHeight + dir * taxi.sensorForwardOffset;
+        // Direzione del segmento centrale from->to (serve per calcolare la destra della strada)
+        Vector3 segDir = (to.transform.position - from.transform.position).normalized;
+        if (segDir.sqrMagnitude < 0.0001f) return;
+
+        Vector3 roadRight = Vector3.Cross(Vector3.up, segDir).normalized;
+
+        // Capisce da che lato è il taxi rispetto alla strada (così offset coerente)
+        float sideSign = Mathf.Sign(Vector3.Dot(taxiPos - from.transform.position, roadRight));
+        if (sideSign == 0f) sideSign = 1f;
+
+        // Punto di arrivo "in corsia" (non al centro strada)
+        Vector3 toLanePos = to.transform.position + roadRight * taxi.laneOffset * sideSign;
+
+        // Direzione del raggio: taxi -> punto corsia
+        Vector3 dir = (toLanePos - taxiPos).normalized;
+        if (dir.sqrMagnitude < 0.0001f) return;
+
+        // Origine come nel sensore: taxi + altezza + piccolo offset in avanti
+        Vector3 origin = taxiPos + Vector3.up * taxi.sensorHeight + dir * taxi.sensorForwardOffset;
+
+        // Lunghezza fissa (non si ferma al nodo)
+        float len = length;
         Vector3 end = origin + dir * len;
 
         Gizmos.DrawLine(origin, end);
         Gizmos.DrawWireSphere(origin, taxi.sensorRadius);
         Gizmos.DrawWireSphere(end, taxi.sensorRadius);
     }
+
 }

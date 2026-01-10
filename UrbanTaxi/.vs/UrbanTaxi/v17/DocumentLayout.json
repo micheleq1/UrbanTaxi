@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\assets\\script\\taxi\\taxicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\taxicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\assets\\script\\taxi\\agentetaxi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\agentetaxi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\taxi\\agentetaxi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\agentetaxi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\taxi\\taxicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\taxicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\assets\\script\\taxi\\taximissionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -79,26 +79,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TaxiController.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\TaxiController.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Taxi\\TaxiController.cs",
               "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\TaxiController.cs",
               "RelativeToolTip": "Assets\\Script\\Taxi\\TaxiController.cs",
-              "ViewState": "AgIAAMcAAAAAAAAAAAAAwNkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALcAAAAAAAAAAAA8wM8AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-07T11:59:33.096Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "AgenteTaxi.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\AgenteTaxi.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Taxi\\AgenteTaxi.cs",
               "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\AgenteTaxi.cs",
               "RelativeToolTip": "Assets\\Script\\Taxi\\AgenteTaxi.cs",
-              "ViewState": "AgIAADkBAAAAAAAAAAAQwFYBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAswJIAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-07T11:15:25.739Z",
               "EditorCaption": ""
