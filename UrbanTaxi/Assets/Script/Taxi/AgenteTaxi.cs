@@ -20,6 +20,15 @@ public class TaxiAgent : Agent
     [Header("Episode Stats")]
     public float episodeReward = 0f; // reward totale dell'episodio corrente
     public int episodeCount = 0;     // numero episodi avviati
+    public bool debugBranchTraffic = false;
+    public int debugEveryNDecisions = 5;
+    private int debugDecisionCounter = 0;
+
+    [Header("Gizmos - Branch Sensors")]
+    public bool drawBranchGizmos = true;
+    public int branchGizmoSteps = 12;     // quante sfere per il “tubo”
+    public bool branchGizmosOnlyWhenPlaying = true; // evita chiamate fisiche in edit mode
+
 
     public override void Initialize()
     {
@@ -84,9 +93,15 @@ public class TaxiAgent : Agent
                 float nToGoal = Vector3.Distance(n.transform.position, taxi.goalNode.transform.position);
                 float improvement = (currToGoal - nToGoal) / MaxMapDist;
                 sensor.AddObservation(Mathf.Clamp(improvement, -1f, 1f));
+
+                float blocked = BranchBlockedByStoppedCarOrObstacle(taxi.currentNode, n);
+                sensor.AddObservation(blocked); // 0 libero, 1 bloccato
+                if (blocked == 1)
+                    Debug.Log("osservazione strada " + i + ": " + blocked);
             }
             else
             {
+                sensor.AddObservation(0f);
                 sensor.AddObservation(0f);
                 sensor.AddObservation(0f);
                 sensor.AddObservation(0f);
@@ -117,7 +132,6 @@ public class TaxiAgent : Agent
         // azione non valida
         if (action < 0 || action >= neighbors.Count)
         {
-            //AddEpisodeReward(-0.02f); 
             action = 0;
         }
 
@@ -138,13 +152,17 @@ public class TaxiAgent : Agent
             }
         }
 
+        float blocked = BranchBlockedByStoppedCarOrObstacle(taxi.currentNode, chosen);
+        AddEpisodeReward(-0.2f * blocked); // penalità solo se blocked=1
+
+        // poi esegui la scelta
         taxi.SetTargetNode(chosen);
     }
 
     private void FixedUpdate()
     {
         if (StepCount > 0)
-            AddEpisodeReward(-0.003f*Time.fixedDeltaTime);
+            AddEpisodeReward(-0.003f * Time.fixedDeltaTime);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -196,9 +214,129 @@ public class TaxiAgent : Agent
 
         float delta = prevDistToGoal - newDist; // >0 se ti avvicin
 
-            float shaped = Mathf.Clamp(delta / MaxMapDist, -1f, 1f);
-            AddEpisodeReward(0.35f * shaped);
+        float shaped = Mathf.Clamp(delta / MaxMapDist, -1f, 1f);
+        AddEpisodeReward(0.35f * shaped);
 
         prevDistToGoal = newDist;
     }
+
+    private const float STOPPED_SPEED = 0.2f; // sotto questa = ferma
+
+    private float BranchBlockedByStoppedCarOrObstacle(TaxiRoadNode from, TaxiRoadNode to)
+    {
+        Vector3 a = from.transform.position;
+        Vector3 b = to.transform.position;
+
+        Vector3 dir = (b - a).normalized;
+        float len = Vector3.Distance(a, b);
+
+        // Origine: sul nodo corrente, alzata e leggermente in avanti lungo il ramo
+        Vector3 origin = a + Vector3.up * taxi.sensorHeight + dir * taxi.sensorForwardOffset;
+
+        LayerMask mask = taxi.carLayer | taxi.obstacleLayer;
+
+        float castLen = Mathf.Min(taxi.sensorLength, len);
+        if (castLen <= 0.01f) return 0f;
+
+        RaycastHit[] hits = Physics.SphereCastAll(
+            origin,
+            taxi.sensorRadius,
+            dir,
+            castLen,
+            mask,
+            QueryTriggerInteraction.Ignore
+        );
+
+
+        if (hits == null || hits.Length == 0)
+            return 0f;
+
+        // Ordina per distanza: controlli prima ciò che sta più vicino
+        System.Array.Sort(hits, (h1, h2) => h1.distance.CompareTo(h2.distance));
+
+        foreach (var hit in hits)
+        {
+            // Ostacolo statico (Obstacle) -> consideralo bloccato
+            if (hit.rigidbody == null)
+            {
+                Debug.Log("ostacolo individuato");
+                return 1f;
+
+            }
+
+            // Se è un'auto (Car), controlla se è ferma
+            float fwdSpeed = Vector3.Dot(hit.rigidbody.velocity, dir);
+
+            if (fwdSpeed < STOPPED_SPEED)
+                return 1f; // auto ferma sul ramo -> ramo bloccato
+        }
+
+        return 0f; // nessuna auto ferma trovata
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (!drawBranchGizmos) return;
+        if (taxi == null) taxi = GetComponent<TaxiController>();
+        if (taxi == null || taxi.currentNode == null) return;
+
+        if (branchGizmosOnlyWhenPlaying && !Application.isPlaying) return;
+
+        List<TaxiRoadNode> neighbors = GetSortedNeighbors(taxi.currentNode);
+        if (neighbors == null || neighbors.Count == 0) return;
+
+        // Palette colori per i 4 rami (se non bloccati)
+        Color[] baseColors = new Color[]
+        {
+        Color.cyan,
+        Color.green,
+        Color.magenta,
+        Color.white
+        };
+
+        int steps = Mathf.Max(2, branchGizmoSteps);
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (i >= neighbors.Count) break;
+
+            TaxiRoadNode to = neighbors[i];
+
+            // calcolo geometria identica al tuo BranchBlocked...
+            Vector3 a = taxi.currentNode.transform.position;
+            Vector3 b = to.transform.position;
+
+            Vector3 dir = (b - a).normalized;
+            float len = Vector3.Distance(a, b);
+
+            Vector3 origin = a + Vector3.up * taxi.sensorHeight + dir * taxi.sensorForwardOffset;
+
+            float castLen = Mathf.Min(taxi.sensorLength, len);
+            if (castLen <= 0.01f) continue;
+
+            Vector3 end = origin + dir * castLen;
+
+            // stesso check “blocked”
+            float blocked = BranchBlockedByStoppedCarOrObstacle(taxi.currentNode, to);
+
+            Color c = (blocked >= 0.5f) ? Color.red : baseColors[i];
+
+            // Asse
+            Gizmos.color = c;
+            Gizmos.DrawLine(origin, end);
+
+            // Sfere inizio/fine (raggio reale)
+            Gizmos.DrawWireSphere(origin, taxi.sensorRadius);
+            Gizmos.DrawWireSphere(end, taxi.sensorRadius);
+
+            // “Tubo” (serie di sfere lungo il ramo)
+            Gizmos.color = new Color(c.r, c.g, c.b, 0.25f);
+            for (int s = 0; s <= steps; s++)
+            {
+                float t = s / (float)steps;
+                Vector3 p = Vector3.Lerp(origin, end, t);
+                Gizmos.DrawWireSphere(p, taxi.sensorRadius);
+            }
+        }
+    }
 }
+

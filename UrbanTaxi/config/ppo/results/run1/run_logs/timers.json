@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1767951914",
+        "python_version": "3.10.3 (tags/v3.10.3:a342a49, Mar 16 2022, 13:07:40) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\.venv\\Scripts\\mlagents-learn taxi_config.yml --run-id=run1",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.2.2+cu121",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1767951995"
+    },
+    "total": 80.29894880000211,
+    "count": 1,
+    "self": 0.08484060000046156,
+    "children": {
+        "run_training.setup": {
+            "total": 0.27042420000361744,
+            "count": 1,
+            "self": 0.27042420000361744
+        },
+        "TrainerController.start_learning": {
+            "total": 79.94368399999803,
+            "count": 1,
+            "self": 0.00035629999183584005,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 79.94328960000712,
+                    "count": 1,
+                    "self": 79.94328960000712
+                },
+                "TrainerController._save_models": {
+                    "total": 3.809999907389283e-05,
+                    "count": 1,
+                    "self": 3.809999907389283e-05
+                }
+            }
+        }
+    }
+}

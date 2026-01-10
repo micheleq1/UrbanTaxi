@@ -43425,6 +43425,11 @@ MonoBehaviour:
   timeoutPenalty: -0.5
   episodeReward: 0
   episodeCount: 0
+  debugBranchTraffic: 0
+  debugEveryNDecisions: 5
+  drawBranchGizmos: 1
+  branchGizmoSteps: 12
+  branchGizmosOnlyWhenPlaying: 1
 --- !u!114 &1549421559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43438,7 +43443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 19
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
