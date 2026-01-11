@@ -31,6 +31,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     private bool isStopped;
     private bool reachedGoal;
     private bool canEnterIntersection = true;
+    private bool inIntersection = false;
 
     private TaxiAgent agent;
     private Rigidbody rb;
@@ -82,7 +83,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         if (targetNode == null) return;
 
         bool blockedByTraffic = IsBlockedAhead();
-        bool blockedByIntersection = !canEnterIntersection;
+        bool blockedByIntersection = !canEnterIntersection && !inIntersection;
 
         if (!blockedByTraffic && !blockedByIntersection)
         {
@@ -131,7 +132,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
 
     public void SetTargetNode(TaxiRoadNode node)
     {
-        if (node == null || node == previousNode)
+        if (node == null)
             return;
 
         targetNode = node;
@@ -186,6 +187,10 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     public void SetIntersectionPermission(bool canEnter)
     {
         canEnterIntersection = canEnter;
+    }
+    public void SetInIntersection(bool inInt)
+    {
+        inIntersection = inInt;
     }
 
     public TaxiRoadNode PreviousNode => previousNode;

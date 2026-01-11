@@ -90,8 +90,7 @@ public class TaxiAgent : Agent
 
                 bool blocked = IsChoiceBlocked(taxi.currentNode, n);
                 lastBlockedObs[i] = blocked;
-                if (lastBlockedObs[i] == true)
-                    Debug.Log("strada chiusa +" + i);
+                
 
                 sensor.AddObservation(blocked ? 1f : 0f);
             }
@@ -117,6 +116,7 @@ public class TaxiAgent : Agent
 
     if (decisionSteps > maxDecisionSteps)
     {
+        
         AddEpisodeReward(timeoutPenalty);
         EndEpisode();
         return;
@@ -134,17 +134,26 @@ public class TaxiAgent : Agent
 
     TaxiRoadNode chosen = neighbors[action];
 
-    if (chosen == taxi.PreviousNode)
-    {
-        AddEpisodeReward(-0.05f);
-    }
+        if (chosen == taxi.PreviousNode)
+        {
+            // scegli automaticamente un'altra uscita valida (senza penalità)
+            for (int i = 0; i < neighbors.Count; i++)
+            {
+                if (neighbors[i] != taxi.PreviousNode)
+                {
+                    chosen = neighbors[i];
+                    action = i; // importante per lastBlockedObs
+                    break;
+                }
+            }
+        }
 
-    // ✅ USA SOLO L’OSSERVAZIONE MEMORIZZATA
-    bool blocked = lastBlockedObs[action];
+        // ✅ USA SOLO L’OSSERVAZIONE MEMORIZZATA
+        bool blocked = lastBlockedObs[action];
 
         if (blocked)
         {
-            Debug.Log("penalità per strada chiusa");
+            
             AddEpisodeReward(-0.3f);
         }
 
@@ -155,7 +164,7 @@ public class TaxiAgent : Agent
     private void FixedUpdate()
     {
         if (StepCount > 0)
-            AddEpisodeReward(-0.003f * Time.fixedDeltaTime);
+            AddEpisodeReward(-0.01f * Time.fixedDeltaTime);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -190,6 +199,7 @@ public class TaxiAgent : Agent
 
     public void OnReachedGoal()
     {
+        
         AddEpisodeReward(10f);
         EndEpisode();
     }
@@ -433,7 +443,7 @@ public class TaxiAgent : Agent
         return IsBranchBlocked(current, chosenNeighbor);
     }
 
-    private void OnDrawGizmos()
+   /* private void OnDrawGizmos()
     {
         if (!drawBranchGizmos) return;
 
@@ -529,7 +539,7 @@ public class TaxiAgent : Agent
         Gizmos.DrawWireSphere(bLane + Vector3.up * taxi.sensorHeight, taxi.sensorRadius);
     }
 
-
+    */
 
 
 }

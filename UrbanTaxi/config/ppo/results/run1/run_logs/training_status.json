@@ -1,4 +1,53 @@
 {
+    "AgenteTaxi": {
+        "checkpoints": [
+            {
+                "steps": 1703,
+                "file_path": "results\\run1\\AgenteTaxi\\AgenteTaxi-1703.onnx",
+                "reward": 3.7406303882598877,
+                "creation_time": 1768138247.6293988,
+                "auxillary_file_paths": [
+                    "results\\run1\\AgenteTaxi\\AgenteTaxi-1703.pt"
+                ]
+            },
+            {
+                "steps": 5081,
+                "file_path": "results\\run1\\AgenteTaxi\\AgenteTaxi-5081.onnx",
+                "reward": 1.8793432458683297,
+                "creation_time": 1768139379.1183531,
+                "auxillary_file_paths": [
+                    "results\\run1\\AgenteTaxi\\AgenteTaxi-5081.pt"
+                ]
+            },
+            {
+                "steps": 5631,
+                "file_path": "results\\run1\\AgenteTaxi\\AgenteTaxi-5631.onnx",
+                "reward": -2.531343787908554,
+                "creation_time": 1768139690.2127023,
+                "auxillary_file_paths": [
+                    "results\\run1\\AgenteTaxi\\AgenteTaxi-5631.pt"
+                ]
+            },
+            {
+                "steps": 5631,
+                "file_path": "results\\run1\\AgenteTaxi\\AgenteTaxi-5631.onnx",
+                "reward": null,
+                "creation_time": 1768147789.8810837,
+                "auxillary_file_paths": [
+                    "results\\run1\\AgenteTaxi\\AgenteTaxi-5631.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5631,
+            "file_path": "results\\run1\\AgenteTaxi.onnx",
+            "reward": null,
+            "creation_time": 1768147789.8810837,
+            "auxillary_file_paths": [
+                "results\\run1\\AgenteTaxi\\AgenteTaxi-5631.pt"
+            ]
+        }
+    },
     "metadata": {
         "stats_format_version": "0.3.0",
         "mlagents_version": "1.1.0",

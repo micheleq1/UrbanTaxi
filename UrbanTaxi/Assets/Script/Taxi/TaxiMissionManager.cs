@@ -39,7 +39,6 @@ public class TaxiMissionManager : MonoBehaviour
 
     void Awake()
     {
-
         passengerObj = Instantiate(passengerPrefab);
         passengerObj.SetActive(false);
         passengerWaypoint = passengerObj.GetComponentInChildren<WaypointTarget>(true);
@@ -47,7 +46,6 @@ public class TaxiMissionManager : MonoBehaviour
         destinationObj = Instantiate(destinationPrefab);
         destinationObj.SetActive(false);
         destinationWaypoint = destinationObj.GetComponentInChildren<WaypointTarget>(true);
-
     }
 
     void Start()
@@ -56,7 +54,6 @@ public class TaxiMissionManager : MonoBehaviour
         lastState = state;
         //StartCoroutine(SetTimeScaleDelayed());
     }
-
 
     IEnumerator SetTimeScaleDelayed()
     {
@@ -105,7 +102,6 @@ public class TaxiMissionManager : MonoBehaviour
         yield return null; // 1 frame
 
         SpawnDestination();
-
         isHandlingTransition = false;
     }
 
@@ -118,12 +114,11 @@ public class TaxiMissionManager : MonoBehaviour
 
         Transform dp = destinationPoints[Random.Range(0, destinationPoints.Length)];
         destinationObj.transform.position = dp.position;
-
         destinationObj.SetActive(true);
+
         if (destinationWaypoint != null) destinationWaypoint.ActivateWaypoint();
 
         TaxiRoadNode dropNode = FindClosestNode(destinationObj.transform.position);
-
         taxi.SetGoalNode(dropNode);
 
         state = State.GoingToDropoff;
@@ -140,7 +135,6 @@ public class TaxiMissionManager : MonoBehaviour
         yield return null; // 1 frame
 
         SpawnPassenger();
-
         isHandlingTransition = false;
     }
 
@@ -154,10 +148,10 @@ public class TaxiMissionManager : MonoBehaviour
         Transform sp = passengerSpawnPoints[Random.Range(0, passengerSpawnPoints.Length)];
         passengerObj.transform.position = sp.position;
         passengerObj.SetActive(true);
+
         if (passengerWaypoint != null) passengerWaypoint.ActivateWaypoint();
 
         TaxiRoadNode pickupNode = FindClosestNode(passengerObj.transform.position);
-
         taxi.SetGoalNode(pickupNode);
 
         state = State.GoingToPickup;
