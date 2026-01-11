@@ -43472,7 +43472,7 @@ MonoBehaviour:
   currentNode: {fileID: 1812644357}
   goalNode: {fileID: 1978351642}
   speed: 10
-  laneOffset: 3
+  laneOffset: 3.5
   carLayer:
     serializedVersion: 2
     m_Bits: 8
