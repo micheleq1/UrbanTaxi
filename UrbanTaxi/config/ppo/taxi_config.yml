@@ -22,8 +22,9 @@ behaviors:
         gamma: 0.99
         strength: 1.0
 
-    max_steps: 3.0e6
+    max_steps: 250000
     time_horizon: 64
+    checkpoint_interval: 50000
     summary_freq: 1000
 
 engine_settings:

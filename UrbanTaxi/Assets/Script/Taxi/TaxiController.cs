@@ -31,7 +31,6 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     private bool isStopped;
     private bool reachedGoal;
     private bool canEnterIntersection = true;
-    private bool inIntersection = false;
 
     private TaxiAgent agent;
     private Rigidbody rb;
@@ -83,7 +82,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         if (targetNode == null) return;
 
         bool blockedByTraffic = IsBlockedAhead();
-        bool blockedByIntersection = !canEnterIntersection && !inIntersection;
+        bool blockedByIntersection = !canEnterIntersection;
 
         if (!blockedByTraffic && !blockedByIntersection)
         {
@@ -130,18 +129,19 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         agent?.RequestDecision();
     }
 
-    public void SetTargetNode(TaxiRoadNode node)
-    {
-        if (node == null)
-            return;
+public void SetTargetNode(TaxiRoadNode node)
+{
+    if (node == null || node == previousNode) 
+        return;
 
-        targetNode = node;
-        segmentT = 0f;
-        segmentLength = Mathf.Max(
-            0.01f,
-            Vector3.Distance(currentNode.transform.position, node.transform.position)
-        );
-    }
+    targetNode = node;
+    segmentT = 0f;
+    segmentLength = Mathf.Max(
+        0.01f,
+        Vector3.Distance(currentNode.transform.position, node.transform.position)
+    );
+}
+
 
     // ==========================
     // MOVEMENT HELPERS
@@ -187,10 +187,6 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     public void SetIntersectionPermission(bool canEnter)
     {
         canEnterIntersection = canEnter;
-    }
-    public void SetInIntersection(bool inInt)
-    {
-        inIntersection = inInt;
     }
 
     public TaxiRoadNode PreviousNode => previousNode;

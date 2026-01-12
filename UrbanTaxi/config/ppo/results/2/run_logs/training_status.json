@@ -1,0 +1,56 @@
+{
+    "AgenteTaxi": {
+        "checkpoints": [
+            {
+                "steps": 101010,
+                "file_path": "results\\2\\AgenteTaxi\\AgenteTaxi-101010.onnx",
+                "reward": 8.349873064396283,
+                "creation_time": 1768171641.8945382,
+                "auxillary_file_paths": [
+                    "results\\2\\AgenteTaxi\\AgenteTaxi-101010.pt"
+                ]
+            },
+            {
+                "steps": 119592,
+                "file_path": "results\\2\\AgenteTaxi\\AgenteTaxi-119592.onnx",
+                "reward": 6.7687685042619705,
+                "creation_time": 1768200514.6662753,
+                "auxillary_file_paths": [
+                    "results\\2\\AgenteTaxi\\AgenteTaxi-119592.pt"
+                ]
+            },
+            {
+                "steps": 130159,
+                "file_path": "results\\2\\AgenteTaxi\\AgenteTaxi-130159.onnx",
+                "reward": 9.370419870723378,
+                "creation_time": 1768208436.2081387,
+                "auxillary_file_paths": [
+                    "results\\2\\AgenteTaxi\\AgenteTaxi-130159.pt"
+                ]
+            },
+            {
+                "steps": 146066,
+                "file_path": "results\\2\\AgenteTaxi\\AgenteTaxi-146066.onnx",
+                "reward": 5.814485724483218,
+                "creation_time": 1768211794.0384455,
+                "auxillary_file_paths": [
+                    "results\\2\\AgenteTaxi\\AgenteTaxi-146066.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 146066,
+            "file_path": "results\\2\\AgenteTaxi.onnx",
+            "reward": 5.814485724483218,
+            "creation_time": 1768211794.0384455,
+            "auxillary_file_paths": [
+                "results\\2\\AgenteTaxi\\AgenteTaxi-146066.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

@@ -126,7 +126,6 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
         {
             desiredSpeed = 0f;
         }
-
         else
         {
             if (canEnterIntersection)
