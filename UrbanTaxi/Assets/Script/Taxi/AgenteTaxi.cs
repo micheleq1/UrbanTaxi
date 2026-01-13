@@ -13,7 +13,7 @@ public class TaxiAgent : Agent
     private const float MaxMapDist = 320f;
 
     [Header("Episode by Steps")]
-    public int maxDecisionSteps = 80;
+    public int maxDecisionSteps = 100;
     public float timeoutPenalty = -0.5f;
     private int decisionSteps = 0;
 
@@ -90,8 +90,7 @@ public class TaxiAgent : Agent
 
                 bool blocked = IsChoiceBlocked(taxi.currentNode, n);
                 lastBlockedObs[i] = blocked;
-                if (lastBlockedObs[i] == true)
-                    Debug.Log("strada chiusa +" + i);
+                
 
                 if(taxi.currentNode.nodeType == RoadNodeType.IntersectionCenter){
                     sensor.AddObservation(blocked ? 1f : 0f);
@@ -149,9 +148,9 @@ public class TaxiAgent : Agent
 
         if (blocked)
         {
-            Debug.Log("strada bloccata → penalità, resto sul nodo");
+            
             AddEpisodeReward(-0.3f);
-            return; // non imposto nessun nuovo target
+            
         }
 
     // solo se NON bloccata

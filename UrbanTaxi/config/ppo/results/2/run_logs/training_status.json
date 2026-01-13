@@ -36,15 +36,24 @@
                 "auxillary_file_paths": [
                     "results\\2\\AgenteTaxi\\AgenteTaxi-146066.pt"
                 ]
+            },
+            {
+                "steps": 0,
+                "file_path": "results\\2\\AgenteTaxi\\AgenteTaxi-0.onnx",
+                "reward": null,
+                "creation_time": 1768230906.1092896,
+                "auxillary_file_paths": [
+                    "results\\2\\AgenteTaxi\\AgenteTaxi-0.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 146066,
+            "steps": 0,
             "file_path": "results\\2\\AgenteTaxi.onnx",
-            "reward": 5.814485724483218,
-            "creation_time": 1768211794.0384455,
+            "reward": null,
+            "creation_time": 1768230906.1092896,
             "auxillary_file_paths": [
-                "results\\2\\AgenteTaxi\\AgenteTaxi-146066.pt"
+                "results\\2\\AgenteTaxi\\AgenteTaxi-0.pt"
             ]
         }
     },

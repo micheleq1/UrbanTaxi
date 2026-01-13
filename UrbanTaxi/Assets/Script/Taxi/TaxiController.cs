@@ -69,6 +69,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
 
         if (targetNode == null)
         {
+            
             RequestAgentDecision();
         }
     }

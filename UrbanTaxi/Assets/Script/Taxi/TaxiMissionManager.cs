@@ -54,7 +54,7 @@ public class TaxiMissionManager : MonoBehaviour
     {
         SpawnPassenger();
         lastState = state;
-        StartCoroutine(SetTimeScaleDelayed());
+        //StartCoroutine(SetTimeScaleDelayed());
     }
 
 

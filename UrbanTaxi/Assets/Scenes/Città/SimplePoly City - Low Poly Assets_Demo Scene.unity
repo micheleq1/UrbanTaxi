@@ -3559,6 +3559,10 @@ PrefabInstance:
       propertyPath: intersection
       value: 
       objectReference: {fileID: 1535731111}
+    - target: {fileID: 470150302325173181, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 511034736228429946, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: m_LocalScale.z
       value: 3
@@ -3626,6 +3630,10 @@ PrefabInstance:
     - target: {fileID: 1210820713940244779, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232644200864173434, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1247711116786698113, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: intersection
@@ -3735,6 +3743,10 @@ PrefabInstance:
       propertyPath: intersection
       value: 
       objectReference: {fileID: 1984189585}
+    - target: {fileID: 2420643279569556118, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2456799141782868677, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: intersection
       value: 
@@ -3839,6 +3851,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3265961402370245976, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3318500940545680229, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: intersection
       value: 
@@ -3894,6 +3910,10 @@ PrefabInstance:
     - target: {fileID: 3966636699998616331, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994749162320861477, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4081480255347298814, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: m_LocalScale.z
@@ -3990,6 +4010,10 @@ PrefabInstance:
     - target: {fileID: 4765586686700981480, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866608030734500091, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4904866649692572266, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: m_LocalScale.x
@@ -4131,6 +4155,10 @@ PrefabInstance:
       propertyPath: intersection
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6265953691779299514, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6382284724275488164, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: intersection
       value: 
@@ -4223,6 +4251,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7436633351556917923, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7498380182053266031, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: intersection
       value: 
@@ -4230,6 +4262,18 @@ PrefabInstance:
     - target: {fileID: 7514608398316224240, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7589499158914454140, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599478855460187339, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604016532538383337, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7628000053357972679, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: intersection
@@ -4267,6 +4311,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7835453314349476481, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7876720212647799119, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: intersection
       value: 
@@ -4275,6 +4323,10 @@ PrefabInstance:
       propertyPath: intersection
       value: 
       objectReference: {fileID: 1535731111}
+    - target: {fileID: 7932818780384531990, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7949240752511219640, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -4371,6 +4423,14 @@ PrefabInstance:
       propertyPath: intersection
       value: 
       objectReference: {fileID: 1141379404}
+    - target: {fileID: 9019866379096737992, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097898719419047316, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
+      propertyPath: maxOccupancyTime
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 9125702281602036072, guid: 199999dcc2768ab42bd637b447fbd98e, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -14617,7 +14677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 05aec82adc02f16409639716322b1673, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 05aec82adc02f16409639716322b1673, type: 3}
       propertyPath: m_LocalPosition.y
@@ -43543,7 +43603,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 886e7fb356dde7e438cb7e3f417536e9, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: AgenteTaxi
@@ -57256,7 +57316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6e296792490e74da6d9d108c47b4a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxOccupancyTime: 25
+  maxOccupancyTime: 100
 --- !u!65 &1844383290
 BoxCollider:
   m_ObjectHideFlags: 0
