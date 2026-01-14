@@ -2,24 +2,6 @@
     "AgenteTaxi": {
         "checkpoints": [
             {
-                "steps": 102969,
-                "file_path": "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-102969.onnx",
-                "reward": 8.201458331611422,
-                "creation_time": 1768342789.7770948,
-                "auxillary_file_paths": [
-                    "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-102969.pt"
-                ]
-            },
-            {
-                "steps": 107985,
-                "file_path": "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-107985.onnx",
-                "reward": 7.658959182619139,
-                "creation_time": 1768343865.403832,
-                "auxillary_file_paths": [
-                    "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-107985.pt"
-                ]
-            },
-            {
                 "steps": 110852,
                 "file_path": "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-110852.onnx",
                 "reward": 8.079948897361755,
@@ -45,15 +27,33 @@
                 "auxillary_file_paths": [
                     "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-171112.pt"
                 ]
+            },
+            {
+                "steps": 174330,
+                "file_path": "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-174330.onnx",
+                "reward": 8.921610501928066,
+                "creation_time": 1768417954.2153134,
+                "auxillary_file_paths": [
+                    "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-174330.pt"
+                ]
+            },
+            {
+                "steps": 194251,
+                "file_path": "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-194251.onnx",
+                "reward": 9.500568684374931,
+                "creation_time": 1768422575.0023434,
+                "auxillary_file_paths": [
+                    "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-194251.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 171112,
+            "steps": 194251,
             "file_path": "results\\definitivo2\\AgenteTaxi.onnx",
-            "reward": 9.36809048141752,
-            "creation_time": 1768357090.0136564,
+            "reward": 9.500568684374931,
+            "creation_time": 1768422575.0023434,
             "auxillary_file_paths": [
-                "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-171112.pt"
+                "results\\definitivo2\\AgenteTaxi\\AgenteTaxi-194251.pt"
             ]
         }
     },
