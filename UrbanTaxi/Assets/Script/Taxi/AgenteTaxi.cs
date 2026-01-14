@@ -13,8 +13,8 @@ public class TaxiAgent : Agent
     private const float MaxMapDist = 320f;
 
     [Header("Episode by Steps")]
-    public int maxDecisionSteps = 100;
-    public float timeoutPenalty = -0.5f;
+    public int maxDecisionSteps = 150;
+    public float timeoutPenalty = -0.8f;
     private int decisionSteps = 0;
 
     [Header("Episode Stats")]
@@ -29,6 +29,62 @@ public class TaxiAgent : Agent
     private readonly TaxiRoadNode[] lastNeighbors = new TaxiRoadNode[4];
     private int lastObsFrame = -999999;
 
+    // ==========================
+    // DISTANCE WEIGHT (near vs far)
+    // ==========================
+    [Header("Distance thresholds (meters)")]
+    [Tooltip("Sotto questa distanza il goal è considerato 'vicino' (penalità traffico minima).")]
+    public float nearMeters = 80f;
+
+    [Tooltip("Sopra questa distanza il goal è considerato 'lontano' (penalità traffico massima).")]
+    public float farMeters = 200f;
+
+    // dist norm salvata ad ogni CollectObservations (0..1)
+    private float lastDistNorm = 0f;
+
+    // ==========================
+    // BLOCKED RISK PENALTY (one-shot)
+    // ==========================
+    [Header("Blocked risk penalty (one-shot)")]
+    [Tooltip("Penalità quando goal è vicino (blocked=true).")]
+    public float Pnear = 0.10f;
+
+    [Tooltip("Penalità quando goal è lontano (blocked=true).")]
+    public float Pfar = 0.80f;
+
+    // ==========================
+    // DEBUG
+    // ==========================
+    [Header("Debug")]
+    public bool debugBlockedRisk = true;
+
+    [Tooltip("Stampa max 1 log ogni N secondi per non spammare.")]
+    public float debugThrottleSeconds = 0.35f;
+
+    private float nextDebugTime = 0f;
+
+    private void DebugThrottled(string msg)
+    {
+        if (!debugBlockedRisk) return;
+        if (Time.time < nextDebugTime) return;
+        nextDebugTime = Time.time + debugThrottleSeconds;
+        
+
+    }
+
+    // 0 = vicino, 1 = lontano (con transizione morbida tra nearMeters e farMeters)
+    private float DistanceWeight01()
+    {
+        float near = Mathf.Clamp01(nearMeters / MaxMapDist);
+        float far = Mathf.Clamp01(farMeters / MaxMapDist);
+
+        float w = Mathf.InverseLerp(near, far, lastDistNorm); // 0..1
+
+        // smoothstep per rendere la curva più morbida
+        w = w * w * (3f - 2f * w);
+
+        return w;
+    }
 
     public override void Initialize()
     {
@@ -62,7 +118,10 @@ public class TaxiAgent : Agent
         sensor.AddObservation(toGoalLocal.z);
 
         float distToGoal = toGoal.magnitude;
-        sensor.AddObservation(Mathf.Clamp01(distToGoal / MaxMapDist));
+
+        // salva e osserva dist normalizzata
+        lastDistNorm = Mathf.Clamp01(distToGoal / MaxMapDist);
+        sensor.AddObservation(lastDistNorm);
 
         List<TaxiRoadNode> neighbors = GetSortedNeighbors(taxi.currentNode);
 
@@ -90,15 +149,12 @@ public class TaxiAgent : Agent
 
                 bool blocked = IsChoiceBlocked(taxi.currentNode, n);
                 lastBlockedObs[i] = blocked;
-                
 
-                if(taxi.currentNode.nodeType == RoadNodeType.IntersectionCenter){
+                // mantieni la tua logica: info blocked solo al centro incrocio
+                if (taxi.currentNode.nodeType == RoadNodeType.IntersectionCenter)
                     sensor.AddObservation(blocked ? 1f : 0f);
-                }
                 else
-                {
                     sensor.AddObservation(0f);
-                }
             }
             else
             {
@@ -116,48 +172,49 @@ public class TaxiAgent : Agent
     }
 
     public override void OnActionReceived(ActionBuffers actions)
-{
-    decisionSteps++;
-
-    if (decisionSteps > maxDecisionSteps)
     {
-        AddEpisodeReward(timeoutPenalty);
-        EndEpisode();
-        return;
-    }
+        decisionSteps++;
 
-    if (taxi == null || taxi.currentNode == null) return;
-
-    int action = actions.DiscreteActions[0];
-
-    List<TaxiRoadNode> neighbors = GetSortedNeighbors(taxi.currentNode);
-    if (neighbors == null || neighbors.Count == 0) return;
-
-    if (action < 0 || action >= neighbors.Count)
-        action = 0;
-
-    TaxiRoadNode chosen = neighbors[action];
-
-    if (chosen == taxi.PreviousNode)
-    {
-        AddEpisodeReward(-0.05f);
-    }
-
-    // ✅ USA SOLO L’OSSERVAZIONE MEMORIZZATA
-    bool blocked = lastBlockedObs[action];
-
-        if (blocked)
+        if (decisionSteps > maxDecisionSteps)
         {
-            
-            AddEpisodeReward(-0.3f);
-            
+            AddEpisodeReward(timeoutPenalty);
+            EndEpisode();
+            return;
         }
 
-    // solo se NON bloccata
-    taxi.SetTargetNode(chosen);
+        if (taxi == null || taxi.currentNode == null) return;
 
-}
+        int action = actions.DiscreteActions[0];
 
+        List<TaxiRoadNode> neighbors = GetSortedNeighbors(taxi.currentNode);
+        if (neighbors == null || neighbors.Count == 0) return;
+
+        if (action < 0 || action >= neighbors.Count)
+            action = 0;
+
+        TaxiRoadNode chosen = neighbors[action];
+
+        if (chosen == taxi.PreviousNode)
+            AddEpisodeReward(-0.05f);
+
+        // ✅ usa solo osservazione memorizzata
+        bool blocked = lastBlockedObs[action];
+
+        bool shouldPenalizeBlocked = blocked && taxi.currentNode.nodeType == RoadNodeType.IntersectionCenter;
+
+        if (shouldPenalizeBlocked)
+        {
+            float w = DistanceWeight01();
+            float pen = -Mathf.Lerp(Pnear, Pfar, w);
+            AddEpisodeReward(pen);
+
+            DebugThrottled($"[BLOCKED-RISK] (INTERSECTION) dist={(lastDistNorm * MaxMapDist):0}m w={w:0.00} pen={pen:0.000}");
+        }
+
+
+        // ✅ ci va comunque
+        taxi.SetTargetNode(chosen);
+    }
 
     private void FixedUpdate()
     {
@@ -223,30 +280,23 @@ public class TaxiAgent : Agent
 
     private const float STOPPED_SPEED = 0.2f;
 
-    // Ramo normale (limitato da sensorLength)
     private bool IsBranchBlocked(TaxiRoadNode from, TaxiRoadNode to)
     {
         if (taxi == null) taxi = GetComponent<TaxiController>();
         if (taxi == null || from == null || to == null) return false;
 
-        // Punto reale del taxi (in corsia)
         Vector3 taxiPos = transform.position;
 
-        // Direzione centrale del segmento (serve per calcolare la "destra" della strada)
         Vector3 segDir = (to.transform.position - from.transform.position).normalized;
         if (segDir.sqrMagnitude < 0.0001f) return false;
 
-        // Vettore right della strada
         Vector3 roadRight = Vector3.Cross(Vector3.up, segDir).normalized;
 
-        // Determina su quale lato corsia sta il taxi (così l'offset va dalla parte giusta)
         float sideSign = Mathf.Sign(Vector3.Dot(taxiPos - from.transform.position, roadRight));
         if (sideSign == 0f) sideSign = 1f;
 
-        // Punto "to" spostato in corsia (non al centro strada)
         Vector3 toLanePos = to.transform.position + roadRight * taxi.laneOffset * sideSign;
 
-        // ✅ Origine come TaxiController: dal taxi + altezza + un filo avanti nella direzione della corsia
         Vector3 dir = (toLanePos - taxiPos).normalized;
 
         Vector3 origin = taxiPos
@@ -255,7 +305,6 @@ public class TaxiAgent : Agent
 
         LayerMask mask = taxi.carLayer | taxi.obstacleLayer;
 
-        // ✅ Lunghezza fissa: non dipende dal nodo
         float distToNode = Vector3.Distance(origin, toLanePos);
         float castLen = Mathf.Min(taxi.sensorLength, distToNode);
         if (castLen <= 0.01f) return false;
@@ -275,14 +324,11 @@ public class TaxiAgent : Agent
 
         foreach (var hit in hits)
         {
-            // ignora il taxi stesso
             if (hit.collider != null && hit.collider.transform.IsChildOf(transform))
                 continue;
 
-            // ostacolo statico
             if (hit.rigidbody == null) return true;
 
-            // auto ferma (consiglio: magnitude, evita falsi positivi)
             float speed = hit.rigidbody.velocity.magnitude;
             if (speed < STOPPED_SPEED) return true;
         }
@@ -290,15 +336,10 @@ public class TaxiAgent : Agent
         return false;
     }
 
-
-    /// <summary>
-    /// Dal nodo di uscita dall'incrocio (intersectionOut) prova a trovare la coppia
-    /// (StreetStart, StreetEnd) della strada collegata, indipendentemente dal verso.
-    /// </summary>
     private bool TryGetStreetSegmentFromExit(
-    TaxiRoadNode intersectionOut,
-    out TaxiRoadNode streetA,
-    out TaxiRoadNode streetB
+        TaxiRoadNode intersectionOut,
+        out TaxiRoadNode streetA,
+        out TaxiRoadNode streetB
     )
     {
         streetA = null;
@@ -322,7 +363,7 @@ public class TaxiAgent : Agent
         {
             if (n == null) continue;
             if ((end1.nodeType == RoadNodeType.StreetStart && n.nodeType == RoadNodeType.StreetEnd) ||
-                (end1.nodeType == RoadNodeType.StreetEnd   && n.nodeType == RoadNodeType.StreetStart))
+                (end1.nodeType == RoadNodeType.StreetEnd && n.nodeType == RoadNodeType.StreetStart))
             {
                 end2 = n;
                 break;
@@ -330,7 +371,6 @@ public class TaxiAgent : Agent
         }
         if (end2 == null) return false;
 
-        // ✅ ORIENTA: A = estremo più vicino all'uscita, B = quello più lontano
         float d1 = Vector3.Distance(intersectionOut.transform.position, end1.transform.position);
         float d2 = Vector3.Distance(intersectionOut.transform.position, end2.transform.position);
 
@@ -348,11 +388,6 @@ public class TaxiAgent : Agent
         return true;
     }
 
-
-    /// <summary>
-    /// SphereCast lungo TUTTA la strada (streetA -> streetB) ma in corsia (offset a destra),
-    /// scegliendo il lato coerente rispetto al taxi.
-    /// </summary>
     private bool IsFullStreetBlockedLane(TaxiRoadNode streetA, TaxiRoadNode streetB)
     {
         if (taxi == null) taxi = GetComponent<TaxiController>();
@@ -366,20 +401,16 @@ public class TaxiAgent : Agent
         if (segLen < 0.01f) return false;
         segDir /= segLen;
 
-        // Vettore "destra" della strada (coerente con il verso A->B)
         Vector3 roadRight = Vector3.Cross(Vector3.up, segDir).normalized;
 
-        // Corsia sempre sulla DESTRA rispetto alla direzione della strada A->B
         Vector3 aLane = a + roadRight * taxi.laneOffset;
         Vector3 bLane = b + roadRight * taxi.laneOffset;
-
 
         Vector3 dir = (bLane - aLane);
         float len = dir.magnitude;
         if (len < 0.01f) return false;
         dir /= len;
 
-        // Origine leggermente "avanti" lungo la corsia + altezza sensore
         Vector3 origin = aLane + Vector3.up * taxi.sensorHeight + dir * taxi.sensorForwardOffset;
 
         LayerMask mask = taxi.carLayer | taxi.obstacleLayer;
@@ -399,14 +430,11 @@ public class TaxiAgent : Agent
 
         foreach (var hit in hits)
         {
-            // ignora il taxi stesso
             if (hit.collider != null && hit.collider.transform.IsChildOf(transform))
                 continue;
 
-            // ostacolo statico
             if (hit.rigidbody == null) return true;
 
-            // auto quasi ferma (usa magnitude, più robusto)
             float speed = hit.rigidbody.velocity.magnitude;
             if (speed < STOPPED_SPEED) return true;
         }
@@ -414,9 +442,6 @@ public class TaxiAgent : Agent
         return false;
     }
 
-    /// <summary>
-    /// Quando sono al centro incrocio: per ogni uscita, controllo tutta la strada dopo l'uscita.
-    /// </summary>
     private bool IsStreetAfterExitBlockedLane(TaxiRoadNode intersectionOut)
     {
         if (!TryGetStreetSegmentFromExit(intersectionOut, out var a, out var b))
@@ -425,118 +450,15 @@ public class TaxiAgent : Agent
         return IsFullStreetBlockedLane(a, b);
     }
 
-    /// <summary>
-    /// Funzione unica usata dall’agente
-    /// </summary>
     private bool IsChoiceBlocked(TaxiRoadNode current, TaxiRoadNode chosenNeighbor)
     {
         if (current == null || chosenNeighbor == null) return false;
 
-        // ✅ Se sono al centro incrocio, controllo l’intera strada StreetStart<->StreetEnd dell’uscita
         if (current.nodeType == RoadNodeType.IntersectionCenter)
             return IsStreetAfterExitBlockedLane(chosenNeighbor);
 
-        // Altrimenti controllo "normale" (ramo corto)
         return IsBranchBlocked(current, chosenNeighbor);
     }
 
-    private void OnDrawGizmos()
-    {
-        if (!drawBranchGizmos) return;
-
-        if (taxi == null)
-            taxi = GetComponent<TaxiController>();
-
-        if (taxi == null || taxi.currentNode == null) return;
-        if (branchGizmosOnlyWhenPlaying && !Application.isPlaying) return;
-
-        TaxiRoadNode current = taxi.currentNode;
-
-        for (int i = 0; i < 4; i++)
-        {
-            TaxiRoadNode neighbor = lastNeighbors[i];
-            if (neighbor == null) continue;
-
-            bool blocked = lastBlockedObs[i];
-            Gizmos.color = blocked ? Color.red : Color.green;
-
-            // --- CASO 1: ramo normale ---
-            if (current.nodeType != RoadNodeType.IntersectionCenter)
-            {
-                DrawRaySegmentLane(current, neighbor, taxi.sensorLength);
-            }
-            // --- CASO 2: centro incrocio → disegno strada completa ---
-            else
-            {
-                if (TryGetStreetSegmentFromExit(neighbor, out var a, out var b))
-                {
-                    DrawFullStreetLane(a, b);
-                }
-            }
-        }
-    }
-
-    private void DrawRaySegmentLane(TaxiRoadNode from, TaxiRoadNode to, float length)
-    {
-        if (taxi == null || from == null || to == null) return;
-
-        Vector3 taxiPos = transform.position;
-
-        // Direzione del segmento centrale from->to (serve per calcolare la destra della strada)
-        Vector3 segDir = (to.transform.position - from.transform.position).normalized;
-        if (segDir.sqrMagnitude < 0.0001f) return;
-
-        Vector3 roadRight = Vector3.Cross(Vector3.up, segDir).normalized;
-
-        // Capisce da che lato è il taxi rispetto alla strada (così offset coerente)
-        float sideSign = Mathf.Sign(Vector3.Dot(taxiPos - from.transform.position, roadRight));
-        if (sideSign == 0f) sideSign = 1f;
-
-        // Punto di arrivo "in corsia" (non al centro strada)
-        Vector3 toLanePos = to.transform.position + roadRight * taxi.laneOffset * sideSign;
-
-        // Direzione del raggio: taxi -> punto corsia
-        Vector3 dir = (toLanePos - taxiPos).normalized;
-        if (dir.sqrMagnitude < 0.0001f) return;
-
-        // Origine come nel sensore: taxi + altezza + piccolo offset in avanti
-        Vector3 origin = taxiPos + Vector3.up * taxi.sensorHeight + dir * taxi.sensorForwardOffset;
-
-        // Lunghezza fissa
-        float len = length;
-        Vector3 end = origin + dir * len;
-
-        Gizmos.DrawLine(origin, end);
-        Gizmos.DrawWireSphere(origin, taxi.sensorRadius);
-        Gizmos.DrawWireSphere(end, taxi.sensorRadius);
-    }
-
-    private void DrawFullStreetLane(TaxiRoadNode streetA, TaxiRoadNode streetB)
-    {
-        if (taxi == null || streetA == null || streetB == null) return;
-
-        Vector3 a = streetA.transform.position;
-        Vector3 b = streetB.transform.position;
-
-        Vector3 segDir = (b - a);
-        float len = segDir.magnitude;
-        if (len < 0.01f) return;
-        segDir /= len;
-
-        Vector3 roadRight = Vector3.Cross(Vector3.up, segDir).normalized;
-
-        // ✅ corsia sempre a destra rispetto ad A->B
-        Vector3 aLane = a + roadRight * taxi.laneOffset;
-        Vector3 bLane = b + roadRight * taxi.laneOffset;
-
-        Gizmos.DrawLine(aLane + Vector3.up * taxi.sensorHeight,
-                        bLane + Vector3.up * taxi.sensorHeight);
-
-        Gizmos.DrawWireSphere(aLane + Vector3.up * taxi.sensorHeight, taxi.sensorRadius);
-        Gizmos.DrawWireSphere(bLane + Vector3.up * taxi.sensorHeight, taxi.sensorRadius);
-    }
-
-
-
-
+    // Gizmos methods (DrawRaySegmentLane / DrawFullStreetLane) rimangono uguali nel tuo file.
 }
