@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\taxi\\agentetaxi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\agentetaxi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\incroci\\intersectionexittrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\incroci\\intersectionexittrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\assets\\script\\taxi\\taxicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\taxicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\incroci\\intersectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\incroci\\intersectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\incroci\\intersectionapproachtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\incroci\\intersectionapproachtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\incroci\\iintersectionvehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\incroci\\iintersectionvehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\trafficblockmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\trafficblockmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\freeflycamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\freeflycamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\assets\\script\\taxi\\taxistatsui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\taxistatsui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\assets\\script\\taxi\\taxiroadnodes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,12 +43,16 @@
       "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\taximissionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\TrafficBlockManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\TrafficBlockManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\assets\\script\\taxi\\taxicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\taxicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\assets\\script\\taxi\\taxistatsui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\taxistatsui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|c:\\users\\miche\\desktop\\progetto iv\\urbantaxi\\urbantaxi\\assets\\script\\taxi\\agentetaxi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D190A16E-F44E-24E0-015D-E766BB132F83}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\taxi\\agentetaxi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\TrafficBlockManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\TrafficBlockManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\NpcSpawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,11 +82,102 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IntersectionExitTrigger.cs",
+              "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Incroci\\IntersectionExitTrigger.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\Incroci\\IntersectionExitTrigger.cs",
+              "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Incroci\\IntersectionExitTrigger.cs",
+              "RelativeToolTip": "Assets\\Script\\Incroci\\IntersectionExitTrigger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T16:19:18.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IntersectionController.cs",
+              "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Incroci\\IntersectionController.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\Incroci\\IntersectionController.cs",
+              "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Incroci\\IntersectionController.cs",
+              "RelativeToolTip": "Assets\\Script\\Incroci\\IntersectionController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T16:18:50.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "IntersectionApproachTrigger.cs",
+              "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Incroci\\IntersectionApproachTrigger.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\Incroci\\IntersectionApproachTrigger.cs",
+              "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Incroci\\IntersectionApproachTrigger.cs",
+              "RelativeToolTip": "Assets\\Script\\Incroci\\IntersectionApproachTrigger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T16:18:46.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IIntersectionVehicle.cs",
+              "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Incroci\\IIntersectionVehicle.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\Incroci\\IIntersectionVehicle.cs",
+              "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Incroci\\IIntersectionVehicle.cs",
+              "RelativeToolTip": "Assets\\Script\\Incroci\\IIntersectionVehicle.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T16:18:40.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TrafficBlockManager.cs",
+              "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\TrafficBlockManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\TrafficBlockManager.cs",
+              "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\TrafficBlockManager.cs",
+              "RelativeToolTip": "Assets\\Script\\TrafficBlockManager.cs",
+              "ViewState": "AgIAAKEAAAAAAAAAAAAUwHUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T16:17:27.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Npc.cs",
+              "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Npc.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\Npc.cs",
+              "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Npc.cs",
+              "RelativeToolTip": "Assets\\Script\\Npc.cs",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAwwMIAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T16:16:19.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FreeFlyCamera.cs",
+              "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\FreeFlyCamera.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\FreeFlyCamera.cs",
+              "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\FreeFlyCamera.cs",
+              "RelativeToolTip": "Assets\\Script\\FreeFlyCamera.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T16:16:12.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "TaxiRoadNodes.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\TaxiRoadNodes.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Taxi\\TaxiRoadNodes.cs",
@@ -66,60 +185,64 @@
               "RelativeToolTip": "Assets\\Script\\Taxi\\TaxiRoadNodes.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-13T10:41:25.485Z"
+              "WhenOpened": "2026-01-13T10:41:25.485Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "TaxiStatsUI.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\TaxiStatsUI.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Taxi\\TaxiStatsUI.cs",
               "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\TaxiStatsUI.cs",
               "RelativeToolTip": "Assets\\Script\\Taxi\\TaxiStatsUI.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T14:57:53.58Z"
+              "WhenOpened": "2026-01-08T14:57:53.58Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "TaxiMissionManager.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\TaxiMissionManager.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Taxi\\TaxiMissionManager.cs",
               "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\TaxiMissionManager.cs",
               "RelativeToolTip": "Assets\\Script\\Taxi\\TaxiMissionManager.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAQwC4AAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAALkAAAAAAAAAAAAAABUAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T12:28:39.538Z"
+              "WhenOpened": "2026-01-07T12:28:39.538Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "TaxiController.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\TaxiController.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Taxi\\TaxiController.cs",
               "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\TaxiController.cs",
               "RelativeToolTip": "Assets\\Script\\Taxi\\TaxiController.cs",
-              "ViewState": "AgIAAMkAAAAAAAAAAAAQwOUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAgwDQAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:59:33.096Z"
+              "WhenOpened": "2026-01-07T11:59:33.096Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 11,
               "Title": "AgenteTaxi.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\AgenteTaxi.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Taxi\\AgenteTaxi.cs",
               "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\AgenteTaxi.cs",
               "RelativeToolTip": "Assets\\Script\\Taxi\\AgenteTaxi.cs",
-              "ViewState": "AgIAALUBAAAAAAAAAAAAwNABAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAkwDIAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-07T11:15:25.739Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 12,
               "Title": "TrafficBlockManager.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\TrafficBlockManager.cs",
               "RelativeDocumentMoniker": "Assets\\TrafficBlockManager.cs",
@@ -130,7 +253,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "NpcSpawner.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\NpcSpawner.cs",
               "RelativeDocumentMoniker": "Assets\\NpcSpawner.cs",
@@ -141,7 +264,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 15,
               "Title": "IntersectionApproachTrigger.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\IntersectionApproachTrigger.cs",
               "RelativeDocumentMoniker": "Assets\\IntersectionApproachTrigger.cs",
@@ -153,7 +276,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 16,
               "Title": "IntersectionExitTrigger.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\IntersectionExitTrigger.cs",
               "RelativeDocumentMoniker": "Assets\\IntersectionExitTrigger.cs",
@@ -165,7 +288,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 17,
               "Title": "FreeFlyCamera.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\FreeFlyCamera.cs",
               "RelativeDocumentMoniker": "Assets\\FreeFlyCamera.cs",
@@ -177,7 +300,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 14,
               "Title": "Npc.cs",
               "DocumentMoniker": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Npc.cs",
               "RelativeDocumentMoniker": "Assets\\Npc.cs",

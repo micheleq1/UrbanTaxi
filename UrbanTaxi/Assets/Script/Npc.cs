@@ -4,43 +4,39 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
 {
-    [Header("Waypoints")]
+    
     public Transform[] waypoints;
     public bool loop = true;
 
-    [Header("Movement")]
+    
     public float speed = 6f;
     public float turnSpeed = 6f;
     public float reachDistance = 1.5f;
 
-    [Header("Traffic Awareness")]
+    
     public LayerMask carLayer;
     public LayerMask obstacleLayer;
     public float sensorLength = 8f;
     public float stopDistance = 2f;
     public float sensorHeight = 0.6f;
 
-    [Header("Obstacle Sensor")]
+    
     public float sensorRadius = 0.6f;
     public float sensorForwardOffset = 0.5f;
 
-    [Header("Random Breakdown")]
+    
     public float incidentCheckInterval = 20f;
     public float incidentProbability = 0.05f;
     public float incidentDuration = 20f;
 
-    [Header("Visual Effects")]
+    
     public ParticleSystem smokeFX;
 
-    // ==========================
-    // INTERSECTION
-    // ==========================
+   
     private bool canEnterIntersection = true;
     public void SetIntersectionPermission(bool canEnter) => canEnterIntersection = canEnter;
 
-    // ==========================
-    // INTERNAL STATE
-    // ==========================
+    
     private Rigidbody rb;
     private int idx = 0;
 
@@ -48,19 +44,17 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
     private float incidentTimer = 0f;
     private float incidentCheckTimer = 0f;
 
-    // Movimento clampato
+    
     private float segmentT = 0f;
     private float segmentLength = 1f;
     private Vector3 segmentStart;
     private Vector3 segmentEnd;
 
-    // ==========================
-    // UNITY
-    // ==========================
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true;        // 🔑 FONDAMENTALE
+        rb.isKinematic = true;        
         rb.interpolation = RigidbodyInterpolation.Interpolate;
 
         InitSegment();
@@ -81,9 +75,7 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
         if (waypoints == null || waypoints.Length == 0) return;
         if (waypoints[idx] == null) return;
 
-        // ==========================
-        // INCIDENTE
-        // ==========================
+        
         if (isBroken)
         {
             incidentTimer += Time.fixedDeltaTime;
@@ -94,9 +86,7 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
         Vector3 dir = segmentEnd - rb.position;
         dir.y = 0f;
 
-        // ==========================
-        // ARRIVO WAYPOINT
-        // ==========================
+        
         if (segmentT >= 1f || dir.magnitude < reachDistance)
         {
             idx++;
@@ -109,9 +99,7 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
 
         Vector3 forward = dir.normalized;
 
-        // ==========================
-        // ROTAZIONE
-        // ==========================
+        
         Quaternion look = Quaternion.LookRotation(forward);
         rb.MoveRotation(
             Quaternion.Slerp(rb.rotation, look, turnSpeed * Time.fixedDeltaTime)
@@ -119,9 +107,7 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
 
         float desiredSpeed = speed;
 
-        // ==========================
-        // BLOCCO INCIDENTE / INCROCI
-        // ==========================
+        
         if (isBroken || !canEnterIntersection)
         {
             desiredSpeed = 0f;
@@ -139,9 +125,7 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
                 }
             }
 
-            // ==========================
-            // SENSORI TRAFFICO
-            // ==========================
+            
             LayerMask sensorMask = carLayer | obstacleLayer;
 
             Vector3 forwardDir = rb.rotation * Vector3.forward;
@@ -171,9 +155,7 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
             }
         }
 
-        // ==========================
-        // MOVIMENTO CLAMPATO
-        // ==========================
+        
         float step = (desiredSpeed / segmentLength) * Time.fixedDeltaTime;
         segmentT = Mathf.Clamp01(segmentT + step);
 
@@ -181,9 +163,7 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
         rb.MovePosition(targetPos);
     }
 
-    // ==========================
-    // INCIDENTE
-    // ==========================
+    
     void StartIncident()
     {
         isBroken = true;
@@ -198,9 +178,7 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
         if (smokeFX != null) smokeFX.Stop();
     }
 
-    // ==========================
-    // DEBUG
-    // ==========================
+    
     void OnDrawGizmosSelected()
     {
         Vector3 fwd = Application.isPlaying && rb != null
@@ -214,9 +192,7 @@ public class NpcCarWaypoint : MonoBehaviour, IIntersectionVehicle
         Gizmos.DrawLine(origin, origin + fwd * sensorLength);
     }
 
-    // ==========================
-    // API
-    // ==========================
+    
     public bool IsBroken() => isBroken;
     public float GetSpeedMagnitude() => speed * (isBroken ? 0f : 1f);
 }

@@ -4,22 +4,22 @@ using System.Collections;
 
 public class TaxiMissionManager : MonoBehaviour
 {
-    [Header("Taxi")]
+    
     public TaxiController taxi;
 
-    [Header("Prefabs")]
+    
     public GameObject passengerPrefab;
     public GameObject destinationPrefab;
 
-    [Header("Spawn Points")]
+    
     public Transform[] passengerSpawnPoints;
     public Transform[] destinationPoints;
 
-    [Header("Distances")]
+    
     public float pickupDistance = 2.5f;
     public float dropoffDistance = 3f;
 
-    [Header("Stop Settings")]
+    
     public float stopTimeAtDestination = 5f;
 
     private GameObject passengerObj;
@@ -33,7 +33,7 @@ public class TaxiMissionManager : MonoBehaviour
 
     private bool isHandlingTransition = false;
 
-    // anti-spam: log solo quando cambia
+    
     private bool lastReachedGoal = false;
     private State lastState;
 
@@ -54,7 +54,7 @@ public class TaxiMissionManager : MonoBehaviour
     {
         SpawnPassenger();
         lastState = state;
-        //StartCoroutine(SetTimeScaleDelayed());
+        
     }
 
 
@@ -70,7 +70,7 @@ public class TaxiMissionManager : MonoBehaviour
 
         bool reached = taxi.HasReachedGoal();
 
-        // log solo al cambio (così non spamma)
+        
         if (reached != lastReachedGoal)
         {
             lastReachedGoal = reached;
@@ -102,7 +102,7 @@ public class TaxiMissionManager : MonoBehaviour
         if (passengerWaypoint != null) passengerWaypoint.DeactivateWaypoint();
         passengerObj.SetActive(false);
 
-        yield return null; // 1 frame
+        yield return null; 
 
         SpawnDestination();
 
@@ -137,7 +137,7 @@ public class TaxiMissionManager : MonoBehaviour
         if (destinationWaypoint != null) destinationWaypoint.DeactivateWaypoint();
         destinationObj.SetActive(false);
 
-        yield return null; // 1 frame
+        yield return null; 
 
         SpawnPassenger();
 

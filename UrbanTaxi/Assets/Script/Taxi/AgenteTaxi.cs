@@ -8,20 +8,21 @@ public class TaxiAgent : Agent
 {
     private TaxiController taxi;
 
-    [Header("Progress Reward")]
+    
     private float prevDistToGoal = 0f;
     private const float MaxMapDist = 320f;
 
-    [Header("Episode by Steps")]
+    
     public int maxDecisionSteps = 150;
     public float timeoutPenalty = -0.8f;
     private int decisionSteps = 0;
 
-    [Header("Episode Stats")]
+    
     public float episodeReward = 0f;
     public int episodeCount = 0;
+    public float previousEpisodeReward = 0f;
 
-    [Header("Gizmos")]
+    
     public bool drawBranchGizmos = true;
     public bool branchGizmosOnlyWhenPlaying = true;
     private Rigidbody selfRb;
@@ -29,36 +30,28 @@ public class TaxiAgent : Agent
     private readonly TaxiRoadNode[] lastNeighbors = new TaxiRoadNode[4];
     private int lastObsFrame = -999999;
 
-    // ==========================
-    // DISTANCE WEIGHT (near vs far)
-    // ==========================
-    [Header("Distance thresholds (meters)")]
-    [Tooltip("Sotto questa distanza il goal è considerato 'vicino' (penalità traffico minima).")]
+    
+ 
+    
     public float nearMeters = 80f;
 
-    [Tooltip("Sopra questa distanza il goal è considerato 'lontano' (penalità traffico massima).")]
+    
     public float farMeters = 200f;
 
-    // dist norm salvata ad ogni CollectObservations (0..1)
+    
     private float lastDistNorm = 0f;
 
-    // ==========================
-    // BLOCKED RISK PENALTY (one-shot)
-    // ==========================
-    [Header("Blocked risk penalty (one-shot)")]
-    [Tooltip("Penalità quando goal è vicino (blocked=true).")]
+    
     public float Pnear = 0.10f;
 
-    [Tooltip("Penalità quando goal è lontano (blocked=true).")]
+    
     public float Pfar = 0.80f;
 
-    // ==========================
-    // DEBUG
-    // ==========================
-    [Header("Debug")]
+
+    
     public bool debugBlockedRisk = true;
 
-    [Tooltip("Stampa max 1 log ogni N secondi per non spammare.")]
+    
     public float debugThrottleSeconds = 0.35f;
 
     private float nextDebugTime = 0f;
@@ -72,15 +65,15 @@ public class TaxiAgent : Agent
 
     }
 
-    // 0 = vicino, 1 = lontano (con transizione morbida tra nearMeters e farMeters)
+    
     private float DistanceWeight01()
     {
         float near = Mathf.Clamp01(nearMeters / MaxMapDist);
         float far = Mathf.Clamp01(farMeters / MaxMapDist);
 
-        float w = Mathf.InverseLerp(near, far, lastDistNorm); // 0..1
+        float w = Mathf.InverseLerp(near, far, lastDistNorm); 
 
-        // smoothstep per rendere la curva più morbida
+        
         w = w * w * (3f - 2f * w);
 
         return w;
@@ -94,6 +87,10 @@ public class TaxiAgent : Agent
 
     public override void OnEpisodeBegin()
     {
+        
+        if (episodeCount > 0)
+            previousEpisodeReward = episodeReward;
+
         episodeCount++;
         episodeReward = 0f;
         decisionSteps = 0;
@@ -107,6 +104,7 @@ public class TaxiAgent : Agent
         );
     }
 
+
     public override void CollectObservations(VectorSensor sensor)
     {
         if (taxi.currentNode == null || taxi.goalNode == null) return;
@@ -119,7 +117,7 @@ public class TaxiAgent : Agent
 
         float distToGoal = toGoal.magnitude;
 
-        // salva e osserva dist normalizzata
+        
         lastDistNorm = Mathf.Clamp01(distToGoal / MaxMapDist);
         sensor.AddObservation(lastDistNorm);
 
@@ -150,7 +148,6 @@ public class TaxiAgent : Agent
                 bool blocked = IsChoiceBlocked(taxi.currentNode, n);
                 lastBlockedObs[i] = blocked;
 
-                // mantieni la tua logica: info blocked solo al centro incrocio
                 if (taxi.currentNode.nodeType == RoadNodeType.IntersectionCenter)
                     sensor.AddObservation(blocked ? 1f : 0f);
                 else
@@ -197,7 +194,7 @@ public class TaxiAgent : Agent
         if (chosen == taxi.PreviousNode)
             AddEpisodeReward(-0.05f);
 
-        // ✅ usa solo osservazione memorizzata
+        
         bool blocked = lastBlockedObs[action];
 
         bool shouldPenalizeBlocked = blocked && taxi.currentNode.nodeType == RoadNodeType.IntersectionCenter;
@@ -212,7 +209,7 @@ public class TaxiAgent : Agent
         }
 
 
-        // ✅ ci va comunque
+        
         taxi.SetTargetNode(chosen);
     }
 
@@ -274,9 +271,7 @@ public class TaxiAgent : Agent
         prevDistToGoal = newDist;
     }
 
-    // =====================================================
-    // SENSORI
-    // =====================================================
+    
 
     private const float STOPPED_SPEED = 0.2f;
 
@@ -460,5 +455,5 @@ public class TaxiAgent : Agent
         return IsBranchBlocked(current, chosenNeighbor);
     }
 
-    // Gizmos methods (DrawRaySegmentLane / DrawFullStreetLane) rimangono uguali nel tuo file.
+    
 }

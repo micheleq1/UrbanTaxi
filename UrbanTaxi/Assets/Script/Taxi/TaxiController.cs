@@ -5,15 +5,15 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Collider))]
 public class TaxiController : MonoBehaviour, IIntersectionVehicle
 {
-    [Header("Navigation")]
+   
     public TaxiRoadNode currentNode;
     public TaxiRoadNode goalNode;
 
-    [Header("Movement")]
+    
     public float speed = 5f;
     public float laneOffset = 1.5f;
 
-    [Header("Traffic Awareness")]
+    
     public LayerMask carLayer;
     public LayerMask obstacleLayer;
     public float sensorLength = 8f;
@@ -35,9 +35,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
     private TaxiAgent agent;
     private Rigidbody rb;
 
-    // ==========================
-    // UNITY
-    // ==========================
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -60,9 +58,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         RequestAgentDecision();
     }
 
-    // ==========================
-    // UPDATE → SOLO LOGICA
-    // ==========================
+   
     void Update()
     {
         if (isStopped) return;
@@ -74,9 +70,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         }
     }
 
-    // ==========================
-    // FIXEDUPDATE → SOLO FISICA
-    // ==========================
+
     void FixedUpdate()
     {
         if (isStopped) return;
@@ -122,9 +116,7 @@ public class TaxiController : MonoBehaviour, IIntersectionVehicle
         }
     }
 
-    // ==========================
-    // AGENT INTERACTION
-    // ==========================
+    
     void RequestAgentDecision()
     {
         agent?.RequestDecision();
@@ -144,9 +136,7 @@ public void SetTargetNode(TaxiRoadNode node)
 }
 
 
-    // ==========================
-    // MOVEMENT HELPERS
-    // ==========================
+    
     Vector3 GetSegmentPosition(float t)
     {
         Vector3 start = currentNode.transform.position;
@@ -173,9 +163,7 @@ public void SetTargetNode(TaxiRoadNode node)
         return false;
     }
 
-    // ==========================
-    // PUBLIC API
-    // ==========================
+    
     public void SetGoalNode(TaxiRoadNode node)
     {
         goalNode = node;
@@ -192,9 +180,7 @@ public void SetTargetNode(TaxiRoadNode node)
 
     public TaxiRoadNode PreviousNode => previousNode;
 
-    // ==========================
-    // STOP
-    // ==========================
+    
 public void StopForSeconds(float seconds)
 {
     if (!gameObject.activeInHierarchy) return;
@@ -205,20 +191,20 @@ System.Collections.IEnumerator StopCoroutine(float seconds)
 {
     isStopped = true;
 
-    // Salva stato Rigidbody
+    
     Vector3 savedVelocity = rb.velocity;
     Vector3 savedAngular = rb.angularVelocity;
     bool savedKinematic = rb.isKinematic;
 
-    // Congela fisica
+    
     rb.velocity = Vector3.zero;
     rb.angularVelocity = Vector3.zero;
     rb.isKinematic = true;
 
-    // Attende in tempo reale (non influenzato da timeScale)
+    
     yield return new WaitForSecondsRealtime(seconds);
 
-    // Ripristina fisica
+    
     rb.isKinematic = savedKinematic;
     rb.velocity = Vector3.zero;
     rb.angularVelocity = Vector3.zero;

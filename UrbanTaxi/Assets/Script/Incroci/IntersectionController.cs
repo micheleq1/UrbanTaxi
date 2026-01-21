@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class IntersectionController : MonoBehaviour
 {
-    [Header("Fail-Safe")]
+    
     public float maxOccupancyTime = 25f;
     private IIntersectionVehicle currentCar = null;
     private Queue<IIntersectionVehicle> queue = new Queue<IIntersectionVehicle>();
 
     private float occupancyTimer = 0f;
 
-    // =========================
-    // CHIAMATO DAI TRIGGER
-    // =========================
+    
 
     public void RequestEnter(IIntersectionVehicle car)
     {
@@ -26,7 +24,7 @@ public class IntersectionController : MonoBehaviour
         {
             currentCar = car;
             car.SetIntersectionPermission(true);
-            occupancyTimer = 0f; // reset timer
+            occupancyTimer = 0f; 
         }
         else
         {
@@ -57,9 +55,7 @@ public class IntersectionController : MonoBehaviour
         }
     }
 
-    // =========================
-    // FAIL-SAFE CONTROLLATO DA FISICA
-    // =========================
+    
 
     private void FixedUpdate()
     {
@@ -69,7 +65,7 @@ public class IntersectionController : MonoBehaviour
 
         if (occupancyTimer >= maxOccupancyTime)
         {
-            // Forza rilascio incrocio se qualcosa è andato storto
+           
             ReleaseCurrent();
         }
     }

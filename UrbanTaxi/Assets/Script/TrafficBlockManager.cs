@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class TrafficBlockageSinglePoint : MonoBehaviour
 {
-    [Header("Blockage Prefab (container with children)")]
-    public GameObject blockagePrefab;     // <-- Ostacoli
+    
+    public GameObject blockagePrefab;     
 
-    [Header("Possible Points (BP_01..BP_N)")]
+    
     public Transform[] blockagePoints;
 
-    [Header("Timing")]
+    
     public float spawnIntervalSeconds = 60f;
     public float activeDurationSeconds = 15f;
 
-    [Header("Options")]
+    
     public bool avoidSamePointTwice = true;
 
     public enum RotationMode
@@ -23,20 +23,20 @@ public class TrafficBlockageSinglePoint : MonoBehaviour
         RandomYaw90Steps
     }
 
-    [Header("Rotation")]
+   
     public RotationMode rotationMode = RotationMode.ExactPointRotation;
     public float randomYawDegrees = 30f;
 
-    [Header("Spawn safety (avoid spawning on cars)")]
-    public LayerMask carLayer;                 // <-- layer delle auto (NPC + taxi)
-    public int maxAttempts = 10;               // quanti punti provare
-    public Vector3 extraPadding = new Vector3(0.5f, 0.5f, 0.5f); // margine sicurezza
+    
+    public LayerMask carLayer;                
+    public int maxAttempts = 10;               
+    public Vector3 extraPadding = new Vector3(0.5f, 0.5f, 0.5f); 
     public bool ignoreTriggers = true;
 
     private GameObject blockageObj;
     private int lastPointIndex = -1;
 
-    // dati �ingombro� dal collider del prefab
+    
     private Vector3 checkCenterLocal = Vector3.zero;
     private Vector3 checkHalfExtentsLocal = new Vector3(2f, 1f, 2f);
 
@@ -47,7 +47,7 @@ public class TrafficBlockageSinglePoint : MonoBehaviour
             blockageObj = Instantiate(blockagePrefab);
             blockageObj.SetActive(false);
 
-            // Prendo un BoxCollider dal prefab (consigliato sul ROOT del prefab)
+            
             BoxCollider bc = blockageObj.GetComponent<BoxCollider>();
             if (bc == null) bc = blockageObj.GetComponentInChildren<BoxCollider>();
 
@@ -110,12 +110,12 @@ public class TrafficBlockageSinglePoint : MonoBehaviour
 
     bool IsSpawnAreaFree(Vector3 pos, Quaternion rot)
     {
-        // Centro del box in world space (root pos + rot * center locale)
+        
         Vector3 centerWorld = pos + rot * checkCenterLocal;
 
         QueryTriggerInteraction qti = ignoreTriggers ? QueryTriggerInteraction.Ignore : QueryTriggerInteraction.Collide;
 
-        // Se trova collider di macchine -> non libero
+        
         Collider[] hits = Physics.OverlapBox(centerWorld, checkHalfExtentsLocal, rot, carLayer, qti);
         return hits == null || hits.Length == 0;
     }
