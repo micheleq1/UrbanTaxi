@@ -100,9 +100,10 @@
               "RelativeDocumentMoniker": "Assets\\Script\\Taxi\\TaxiController.cs",
               "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\TaxiController.cs",
               "RelativeToolTip": "Assets\\Script\\Taxi\\TaxiController.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAnwDsAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAMkAAAAAAAAAAAAQwOUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:59:33.096Z"
+              "WhenOpened": "2026-01-07T11:59:33.096Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -112,7 +113,7 @@
               "RelativeDocumentMoniker": "Assets\\Script\\Taxi\\AgenteTaxi.cs",
               "ToolTip": "C:\\Users\\miche\\Desktop\\Progetto iv\\UrbanTaxi\\UrbanTaxi\\Assets\\Script\\Taxi\\AgenteTaxi.cs",
               "RelativeToolTip": "Assets\\Script\\Taxi\\AgenteTaxi.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAL4BAAAAAAAAAAAuwMQBAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-07T11:15:25.739Z",
               "EditorCaption": ""
